@@ -1,1 +1,3 @@
 rootProject.name = 'jvm-monitoring-workshop'
+
+include("1-simple")
