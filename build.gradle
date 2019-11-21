@@ -1,20 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.1.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    id 'java'
+    id 'org.springframework.boot' version '2.2.1.RELEASE' apply false
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE' apply false
 }
 
-group = 'com.github.fitzoh'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'io.micrometer:micrometer-core'
-    implementation 'io.micrometer:micrometer-registry-prometheus'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
