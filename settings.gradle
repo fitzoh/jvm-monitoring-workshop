@@ -1,3 +1,4 @@
 rootProject.name = 'jvm-monitoring-workshop'
 
 include("1-simple")
+include("2-dimensions")

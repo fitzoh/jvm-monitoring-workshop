@@ -1,4 +1,4 @@
-package com.github.fitzoh.codemash;
+package codemash;
 
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
@@ -26,8 +26,19 @@ public class DimensionalCounterApplication {
         return registry.scrape();
     }
 
+
+    @Scheduled(fixedRate = 1)
+    public void incrementOneMilli() {
+        registry.counter("dimensional", "period", "1ms").increment();
+    }
+
     @Scheduled(fixedRate = 1000)
-    public void increment() {
-        registry.counter("simple").increment();
+    public void incrementOneSec() {
+        registry.counter("dimensional", "period", "1s").increment();
+    }
+
+    @Scheduled(fixedRate = 5000)
+    public void incrementFiveSec() {
+        registry.counter("dimensional", "period", "5s").increment();
     }
 }
