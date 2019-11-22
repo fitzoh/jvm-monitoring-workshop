@@ -4,12 +4,16 @@ plugins {
     id 'java'
 }
 
-bootRun{
+bootRun {
     environment "SERVER_PORT", "8003"
 }
 
 repositories {
     mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
 }
 
 dependencies {
