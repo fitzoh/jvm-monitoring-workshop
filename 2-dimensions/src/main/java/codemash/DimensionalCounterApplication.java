@@ -21,7 +21,7 @@ public class DimensionalCounterApplication {
         SpringApplication.run(DimensionalCounterApplication.class, args);
     }
 
-    @GetMapping(value = "/scrape", produces = MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping(value = {"/", "/scrape"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public String scrape() {
         return registry.scrape();
     }
