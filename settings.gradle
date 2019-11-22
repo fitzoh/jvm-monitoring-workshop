@@ -2,5 +2,6 @@ rootProject.name = 'jvm-monitoring-workshop'
 
 include("prometheus")
 include("1-simple")
+include("grafana")
 include("2-dimensions")
 include("3-registries")
