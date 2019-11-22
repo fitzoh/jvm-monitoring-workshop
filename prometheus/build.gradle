@@ -7,6 +7,10 @@ task start(type: Exec) {
     commandLine "docker", "run", "-d", "-p", "$port:$port", "-v", "$prometheusConfig:/etc/prometheus/prometheus.yml", "--name", name, "--rm", image
 }
 
+task reload(type: Exec) {
+    commandLine 'docker', "kill", "--signal=HUP", name
+}
+
 task stop(type: Exec) {
     commandLine "docker", "kill", name
 }
