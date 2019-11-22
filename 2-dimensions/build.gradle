@@ -4,7 +4,7 @@ plugins {
     id 'java'
 }
 
-bootRun{
+bootRun {
     environment "SERVER_PORT", "8002"
 }
 
@@ -12,9 +12,19 @@ repositories {
     mavenCentral()
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'io.micrometer:micrometer-core'
     implementation 'io.micrometer:micrometer-registry-prometheus'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task activatePrometheusConfig(type: Copy) {
+    from project.file("prometheus.yml")
+    into project(":prometheus").project.file("active")
+    finalizedBy(":prometheus:reload")
 }
