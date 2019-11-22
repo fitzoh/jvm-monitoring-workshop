@@ -4,7 +4,7 @@ plugins {
     id 'java'
 }
 
-bootRun{
+bootRun {
     environment "SERVER_PORT", "8001"
 }
 
@@ -12,9 +12,22 @@ repositories {
     mavenCentral()
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'io.micrometer:micrometer-core'
     implementation 'io.micrometer:micrometer-registry-prometheus'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task startPrometheus(type: Exec) {
+    String prometheusConfig = project.file('src/main/resources/prometheus.yml').absolutePath
+    commandLine "docker", "run", "-d", "-p", "9090:9090", "-v", "$prometheusConfig:/etc/prometheus/prometheus.yml", "--name", "prometheus", "--rm", "prom/prometheus"
+}
+
+task stopPrometheus(type: Exec) {
+    commandLine "docker", "kill", "prometheus"
 }
