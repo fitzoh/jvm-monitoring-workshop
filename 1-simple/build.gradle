@@ -4,6 +4,10 @@ plugins {
     id 'java'
 }
 
+bootRun{
+    environment "SERVER_PORT", "8001"
+}
+
 repositories {
     mavenCentral()
 }
