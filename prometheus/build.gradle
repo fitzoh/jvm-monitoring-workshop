@@ -3,7 +3,7 @@ String name = "prometheus"
 String image = "prom/prometheus"
 
 task start(type: Exec) {
-    String prometheusConfig = project.file('prometheus.yml').absolutePath
+    String prometheusConfig = project.file('active/prometheus.yml').absolutePath
     commandLine "docker", "run", "-d", "-p", "$port:$port", "-v", "$prometheusConfig:/etc/prometheus/prometheus.yml", "--name", name, "--rm", image
 }
 
