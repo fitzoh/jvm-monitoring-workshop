@@ -1,0 +1,15 @@
+[
+  {
+    "name": "prometheus",
+    "image": "prom/prometheus",
+    "cpu": 1,
+    "memory": 1024,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 9090,
+        "hostPort": 9090
+      }
+    ]
+  }
+]
