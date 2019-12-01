@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EndToEndCounterApplication {
 
     PrometheusMeterRegistry meterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
-    Counter counter = meterRegistry.counter("http.server.requests");
+    Counter counter = meterRegistry.counter("simple");
 
     public static void main(String[] args) {
         SpringApplication.run(EndToEndCounterApplication.class, args);
