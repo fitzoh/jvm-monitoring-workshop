@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class DimensionalCounterApplicationTest {
 
     @Test
-    void sameNameAndTagsAreSame() {
+    void sameNameAndTagsAreTheSame() {
         MeterRegistry registry = new SimpleMeterRegistry();
         Counter counter1 = registry.counter("counter", "key", "value");
         Counter counter2 = registry.counter("counter", "key", "value");
