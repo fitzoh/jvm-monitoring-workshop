@@ -12,22 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class EndToEndCounterApplicationTest {
 
     @Test
-    void increment() {
-        var counter = new SimpleMeterRegistry().counter("simple");
-
-        assertThat(counter.count()).isEqualTo(0);
-
-        counter.increment();
-        assertThat(counter.count()).isEqualTo(1);
-
-        counter.increment(2);
-        assertThat(counter.count()).isEqualTo(3);
-
-        counter.increment(-1);
-        assertThat(counter.count()).isEqualTo(2);
-    }
-
-    @Test
     void id() {
         Counter counter = new SimpleMeterRegistry().counter("simple");
 
