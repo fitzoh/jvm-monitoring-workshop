@@ -18,17 +18,12 @@ import java.time.Duration;
 @SpringBootApplication
 public class RegistryApplication {
 
-    CompositeMeterRegistry compositeMeterRegistry;
-    PrometheusMeterRegistry prometheusMeterRegistry;
-    LoggingMeterRegistry loggingMeterRegistry;
+    CompositeMeterRegistry compositeMeterRegistry = new CompositeMeterRegistry();
+    PrometheusMeterRegistry prometheusMeterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+    LoggingMeterRegistry loggingMeterRegistry = new LoggingMeterRegistry(loggingConfig(), Clock.SYSTEM);
 
     public RegistryApplication() {
-        compositeMeterRegistry = new CompositeMeterRegistry();
-
-        prometheusMeterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
         compositeMeterRegistry.add(prometheusMeterRegistry);
-
-        loggingMeterRegistry = new LoggingMeterRegistry(loggingConfig(), Clock.SYSTEM);
         compositeMeterRegistry.add(loggingMeterRegistry);
     }
 
