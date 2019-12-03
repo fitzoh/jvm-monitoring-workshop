@@ -50,7 +50,7 @@ class DimensionalCounterApplicationTest {
     }
 
     @Test
-    void canAddTagsWithTheLongFormBuilder() {
+    void canAlsoAddTagsWithTheLongFormBuilder() {
         MeterRegistry registry = new SimpleMeterRegistry();
         Counter.builder("counter")
                 .tag("key", "value")
