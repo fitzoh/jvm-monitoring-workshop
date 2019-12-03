@@ -28,7 +28,7 @@ public class RegistryApplication {
     public RegistryApplication() {
         compositeMeterRegistry.add(prometheusMeterRegistry);
         compositeMeterRegistry.add(loggingMeterRegistry);
-        counter = Counter.builder("simple")
+        counter = Counter.builder("composite")
                 .description("a simple counter")
                 .baseUnit("thing")
                 .tag("conference", "codemash")
