@@ -22,3 +22,10 @@ dependencies {
     implementation 'io.micrometer:micrometer-registry-prometheus'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+task activatePrometheusConfig(type: Copy) {
+    from project.file("prometheus.yml")
+    into project(":prometheus").project.file("active")
+    finalizedBy(":prometheus:reload")
+}
+
