@@ -28,3 +28,5 @@ task activatePrometheusConfig(type: Copy) {
     into project(":prometheus").project.file("active")
     finalizedBy(":prometheus:reload")
 }
+
+bootRun.dependsOn(activatePrometheusConfig)

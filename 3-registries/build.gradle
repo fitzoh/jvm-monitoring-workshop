@@ -29,3 +29,4 @@ task activatePrometheusConfig(type: Copy) {
     finalizedBy(":prometheus:reload")
 }
 
+bootRun.dependsOn(activatePrometheusConfig)
