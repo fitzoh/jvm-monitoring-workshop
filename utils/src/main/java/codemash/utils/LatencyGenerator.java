@@ -1,4 +1,4 @@
-package codemash.Utils;
+package codemash.utils;
 
 import java.time.Duration;
 import java.util.concurrent.ThreadLocalRandom;
