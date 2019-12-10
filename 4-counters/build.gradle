@@ -5,7 +5,7 @@ plugins {
 }
 
 bootRun {
-    environment "SERVER_PORT", "8003"
+    environment "SERVER_PORT", "8004"
 }
 
 repositories {
