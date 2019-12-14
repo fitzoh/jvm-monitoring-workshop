@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
+import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -55,14 +56,24 @@ public class TimerTest {
 
     @Test
     void youCanUseSamples() throws Exception {
-        Timer timer = registry.timer("some.timer");
-
         Timer.Sample sample = Timer.start(registry);
+
         Thread.sleep(1000);
+
+        Timer timer = registry.timer("some.timer");
         sample.stop(timer);
-
-
         assertThat(timer.count()).isEqualTo(1);
+    }
+
+    @Test
+    void whichLetsYouSetTagsDynamically() throws Exception {
+        Timer.Sample sample = Timer.start(registry);
+
+        Thread.sleep(1000);
+        String success = String.valueOf(new Random().nextBoolean());
+
+        Timer timer = registry.timer("some.timer", "success", success);
+        sample.stop(timer);
     }
 
     @Test
@@ -86,7 +97,5 @@ public class TimerTest {
         sample.stop();
 
         assertThat(ltt.activeTasks()).isEqualTo(0);
-
-
     }
 }
