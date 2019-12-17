@@ -4,6 +4,6 @@ global:
 
 scrape_configs:
   - job_name: 'actuator-app'
-    metrics_path: /scrape
+    metrics_path: /actuator/prometheus
     static_configs:
       - targets: ['host.docker.internal:8009']
