@@ -31,7 +31,7 @@ resource "aws_instance" "prometheus" {
   iam_instance_profile        = aws_iam_instance_profile.default.name
   key_name                    = "fitz-personal-laptop"
   tags = {
-    Name = "prometheus"
+    Name     = "prometheus"
     Workload = "prometheus"
   }
   lifecycle { create_before_destroy = true }

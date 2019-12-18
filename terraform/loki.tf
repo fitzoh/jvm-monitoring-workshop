@@ -31,7 +31,7 @@ resource "aws_instance" "loki" {
   iam_instance_profile        = aws_iam_instance_profile.default.name
   key_name                    = "fitz-personal-laptop"
   tags = {
-    Name = "loki"
+    Name     = "loki"
     Workload = "loki"
   }
   lifecycle { create_before_destroy = true }

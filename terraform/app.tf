@@ -35,7 +35,7 @@ resource "aws_alb_target_group" "app" {
 
 resource "aws_instance" "app" {
   ami                         = data.aws_ami.amazon-linux-2.id
-  count                       = 20
+  count                       = 1
   instance_type               = "t3a.small"
   associate_public_ip_address = true
   security_groups             = [aws_security_group.app.name]
@@ -43,7 +43,7 @@ resource "aws_instance" "app" {
   iam_instance_profile        = aws_iam_instance_profile.default.name
   key_name                    = "fitz-personal-laptop"
   tags = {
-    Name = "spring-boot-app-${count.index}"
+    Name     = "spring-boot-app-${count.index}"
     Workload = "spring-boot"
   }
   lifecycle { create_before_destroy = true }
