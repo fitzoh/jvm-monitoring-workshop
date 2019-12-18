@@ -1,0 +1,11 @@
+task tfFmt(type: Exec){
+    commandLine("terraform", "fmt", "--recursive")
+}
+
+task tfPlan(type: Exec){
+    commandLine("terraform", "plan")
+}
+
+task tfApply(type: Exec){
+    commandLine("terraform", "apply", "-auto-approve")
+}

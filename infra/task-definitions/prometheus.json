@@ -1,7 +1,7 @@
 [
   {
     "name": "prometheus",
-    "image": "prom/prometheus",
+    "image": "590426026649.dkr.ecr.us-east-1.amazonaws.com/codemash-observability/prometheus",
     "cpu": 1,
     "memory": 1024,
     "essential": true,
