@@ -22,4 +22,4 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-jib.to.image = "docker.pkg.github.com/fitzoh/jvm-monitoring-workshop/spring-boot-sample:latest"
+jib.to.image = "590426026649.dkr.ecr.us-east-1.amazonaws.com/codemash-observability/spring-boot-app:latest"
