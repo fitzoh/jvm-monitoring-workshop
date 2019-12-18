@@ -22,13 +22,13 @@ resource "aws_alb_listener" "app" {
 }
 
 resource "aws_alb_target_group" "app" {
-  name = "spring-boot-app"
+  name     = "spring-boot-app"
   vpc_id   = aws_default_vpc.default.id
   protocol = "HTTP"
   port     = 8080
   health_check {
-    path = "/actuator/health"
-    port = "8080"
+    path    = "/actuator/health"
+    port    = "8080"
     timeout = 10
   }
 }
