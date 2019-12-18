@@ -1,6 +1,6 @@
 [
   {
-    "name": "loki",
+    "name": "app",
     "image": "590426026649.dkr.ecr.us-east-1.amazonaws.com/codemash-observability/spring-boot-app",
     "cpu": 1,
     "memory": 1024,
