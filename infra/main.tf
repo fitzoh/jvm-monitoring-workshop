@@ -2,6 +2,10 @@ provider "aws" {
   region = "us-east-1"
 }
 
+module "db" {
+  source = "./db"
+}
+
 data "aws_route53_zone" "default" {
   name = "codemash-observability-workshop.com."
 }
