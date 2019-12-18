@@ -39,14 +39,11 @@ resource "aws_instance" "loki" {
 resource "aws_ecs_service" "loki" {
   name            = "loki"
   cluster         = aws_ecs_cluster.default.id
-  task_definition = aws_ecs_task_definition.loki.id
+  task_definition = aws_ecs_task_definition.loki.arn
   desired_count   = 1
   placement_constraints {
     type       = "memberOf"
     expression = "attribute:workload==loki"
-  }
-  lifecycle {
-    ignore_changes = ["task_definition"]
   }
 }
 

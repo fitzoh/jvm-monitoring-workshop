@@ -39,14 +39,11 @@ resource "aws_instance" "prometheus" {
 resource "aws_ecs_service" "prometheus" {
   name            = "prometheus"
   cluster         = aws_ecs_cluster.default.id
-  task_definition = aws_ecs_task_definition.prometheus.id
+  task_definition = aws_ecs_task_definition.prometheus.arn
   desired_count   = 1
   placement_constraints {
     type       = "memberOf"
     expression = "attribute:workload==prometheus"
-  }
-  lifecycle {
-    ignore_changes = ["task_definition"]
   }
 }
 
