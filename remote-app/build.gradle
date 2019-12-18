@@ -1,0 +1,25 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'java'
+    id 'com.google.cloud.tools.jib'
+}
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
+    implementation project(":utils")
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+jib.to.image = "docker.pkg.github.com/fitzoh/jvm-monitoring-workshop/spring-boot-sample:latest"
