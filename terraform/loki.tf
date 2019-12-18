@@ -32,6 +32,7 @@ resource "aws_instance" "loki" {
   key_name                    = "fitz-personal-laptop"
   tags = {
     Name = "loki"
+    Workload = "loki"
   }
   lifecycle { create_before_destroy = true }
 }

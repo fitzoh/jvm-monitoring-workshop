@@ -32,6 +32,7 @@ resource "aws_instance" "prometheus" {
   key_name                    = "fitz-personal-laptop"
   tags = {
     Name = "prometheus"
+    Workload = "prometheus"
   }
   lifecycle { create_before_destroy = true }
 }

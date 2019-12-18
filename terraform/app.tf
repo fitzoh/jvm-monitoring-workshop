@@ -44,6 +44,7 @@ resource "aws_instance" "app" {
   key_name                    = "fitz-personal-laptop"
   tags = {
     Name = "spring-boot-app-${count.index}"
+    Workload = "spring-boot"
   }
   lifecycle { create_before_destroy = true }
 }
