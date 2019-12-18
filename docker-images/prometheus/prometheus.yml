@@ -7,3 +7,11 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets: ['localhost:9090']
+  - job_name: 'spring-boot'
+    metrics_path: /actuator/prometheus
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 8080
+        filters:
+          - name: "tag:Workload"
+            values: ['spring-boot']

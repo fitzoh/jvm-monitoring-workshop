@@ -83,6 +83,19 @@ resource "aws_iam_role_policy_attachment" "ecs" {
   role = aws_iam_role.default.name
 }
 
+data "aws_iam_policy_document" "ec2-describe-instances" {
+  statement {
+    resources = ["*"]
+    actions = ["ec2:DescribeInstances"]
+  }
+}
+
+resource "aws_iam_role_policy" "ec2-describe-instances" {
+  policy = data.aws_iam_policy_document.ec2-describe-instances.json
+  role = aws_iam_role.default.name
+}
+
+
 resource "aws_ecs_cluster" "default" {
   name = "codemash"
 }
