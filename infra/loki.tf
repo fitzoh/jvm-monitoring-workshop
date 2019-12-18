@@ -45,6 +45,9 @@ resource "aws_ecs_service" "loki" {
     type       = "memberOf"
     expression = "attribute:workload==loki"
   }
+  lifecycle {
+    ignore_changes = ["task_definition"]
+  }
 }
 
 resource "aws_ecs_task_definition" "loki" {

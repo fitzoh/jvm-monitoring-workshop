@@ -45,6 +45,9 @@ resource "aws_ecs_service" "prometheus" {
     type       = "memberOf"
     expression = "attribute:workload==prometheus"
   }
+  lifecycle {
+    ignore_changes = ["task_definition"]
+  }
 }
 
 resource "aws_ecs_task_definition" "prometheus" {
