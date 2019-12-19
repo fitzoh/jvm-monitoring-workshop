@@ -10,7 +10,7 @@ Finally, from the root of the repository run `./gradlew precompile` and you shou
 Under the covers this runs some initial gradle builds for all the java projects to ensure that all maven dependencies have been downloaded,
 and also does an initial pull of all required docker images.
 
-There's a chance of some last minute updates, so you'll probably want to rerun that command shortly before CodeMash.
+There's a chance of some last minute updates, so you'll probably want to pull and re-run that command shortly before CodeMash.
 
 
 ## A note on Gradle
