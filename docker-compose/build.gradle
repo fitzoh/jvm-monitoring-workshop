@@ -1,0 +1,7 @@
+task up(type: Exec) {
+    commandLine("docker-compose", "up", "-d")
+}
+
+task reloadPrometheus(type: Exec){
+    commandLine("docker-compose", "kill", "-s=HUP", "prometheus")
+}

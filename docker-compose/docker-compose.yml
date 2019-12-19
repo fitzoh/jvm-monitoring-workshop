@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  prometheus:
+    image: "prom/prometheus"
+    container_name: "prometheus"
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./prometheus/active:/etc/prometheus"
+  grafana:
+    image: "grafana/grafana"
+    container_name: "grafana"
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: codemash
+      GF_SECURITY_ADMIN_PASSWORD: codemash
+    volumes:
+      - "./grafana/data:/var/lib/grafana"
+#  loki:
+#    image: "grafana/loki"
+#    ports:
+#      - "3100:3100"
+#  promtail:
+#    image: "grafana/promtail"
+#    command: "-config.file=/etc/promtail/promtail.yml"
+#    volumes:
+#      - "./loki/promtail.yml:/etc/promtail/promtail.yml"
+#      - "./loki/spring-logs:/var/log/spring"

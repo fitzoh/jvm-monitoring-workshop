@@ -1,9 +1,0 @@
-global:
-  scrape_interval:     5s
-  evaluation_interval: 5s
-
-scrape_configs:
-  - job_name: 'simple-app'
-    metrics_path: /scrape
-    static_configs:
-      - targets: ['host.docker.internal:8080']

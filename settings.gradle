@@ -1,8 +1,5 @@
 rootProject.name = 'jvm-monitoring-workshop'
 
-include("prometheus")
-include("grafana")
-include("utils")
 include("1-simple-e2e")
 include("2-dimensions")
 include("3-registries")
@@ -12,6 +9,8 @@ include("6-timers")
 include("7-distribution-summaries")
 include("8-binders")
 include("9-actuator")
+include("utils")
+include("docker-compose")
+include("terraform")
 include("docker-images:spring-boot-app")
 include("docker-images:prometheus")
-include("terraform")
