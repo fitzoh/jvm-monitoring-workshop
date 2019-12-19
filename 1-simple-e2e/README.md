@@ -1,26 +1,22 @@
-# Demo 1: Simple End to End
+# 1: Simple End to End
 
 All commands should be run from the root of the repository.
+
+First, start up the Docker containers:
+
+`./graddlew docker-compose:up`
 
 To start the sample application:
 
 `./gradlew 1:bootRun`
 
-The endpoint can then be accessed at http://localhost:8001/
+The spring boot endpoint can then be accessed at http://localhost:8001/
 
-To prepare the Prometheus config file:
+The `bootRun` command has an added hook that causes it to:
+* copy `prometheus.yml` to the Prometheus config volume
+* send a `SIGHUP` command to the Prometheus container causing it to reload configuration
+That pattern is used throughout this repository
 
-`./gradlew 1:activatePrometheusConfig`
-
-To start prometheus:
-
-`./gradlew startPrometheus`
-
-The prometheus UI can be accessed at http://localhost:9090/
-
-
-To start Grafana:
-
-`./gradlew startGrafana`
+The Prometheus UI can be accessed at http://localhost:9090/
 
 The Grafana UI can be accessed at http://localhost:3000/ with credentials `codemash:codemash`.
