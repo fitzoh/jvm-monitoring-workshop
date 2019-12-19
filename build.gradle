@@ -4,3 +4,11 @@ plugins {
     id 'com.google.cloud.tools.jib' version '1.8.0' apply false
 }
 
+
+task precompile(dependsOn: ["docker-compose:pull"]) {
+    subprojects.each {
+        if (it.name[0].number) {
+            dependsOn("${it.name}:build")
+        }
+    }
+}

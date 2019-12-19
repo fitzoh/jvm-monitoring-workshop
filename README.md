@@ -13,4 +13,3 @@ and also does an initial pull of all required docker images.
 
 There's a chance of some last minute updates, so you'll probably want to rerun that command shortly before CodeMash.
 
-TODO: make the above section not a lie.

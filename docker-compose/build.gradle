@@ -1,6 +1,9 @@
 task up(type: Exec) {
     commandLine("docker-compose", "up", "-d")
 }
+task pull(type: Exec) {
+    commandLine("docker-compose", "pull")
+}
 
 task reloadPrometheus(type: Exec){
     commandLine("docker-compose", "kill", "-s=HUP", "prometheus")
