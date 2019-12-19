@@ -1,0 +1,1 @@
+This directory contains docker images which are used in the remote AWS portion of the workshop (not meant to be run locally).

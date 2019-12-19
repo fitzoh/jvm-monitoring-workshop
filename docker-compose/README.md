@@ -1,0 +1,1 @@
+This directory contains the [Docker Compose](https://docs.docker.com/compose/) configuration used to spin up local containers.

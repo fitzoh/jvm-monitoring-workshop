@@ -1,0 +1,1 @@
+This directory contains [Terraform](https://www.terraform.io/) code used to spin up the AWS infrastructure used for the remote portion of the workshop.
