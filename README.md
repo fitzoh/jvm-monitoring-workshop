@@ -15,4 +15,4 @@ There's a chance of some last minute updates, so you'll probably want to pull an
 
 ## A note on Gradle
 There are a lot of moving parts in this workshop, and we're using [Gradle](https://gradle.org/) to orchestrate them .
-
+//TODO finish this thought and how all commands are run from root of repo.
