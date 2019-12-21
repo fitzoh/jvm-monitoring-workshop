@@ -1,6 +1,18 @@
 task up(type: Exec) {
     commandLine("docker-compose", "up", "-d")
+    //We need to make sure there's a prometheus.yml file in the config dir, so we'll copy a placeholder file over if none exists
+    doFirst {
+        if (!file("prometheus/active/prometheus.yml").exists()) {
+            copy {
+                from "prometheus"
+                into "prometheus/active"
+                include "default-prometheus.yml"
+                rename { "prometheus.yml" }
+            }
+        }
+    }
 }
+
 task pull(type: Exec) {
     commandLine("docker-compose", "pull")
 }
