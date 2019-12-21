@@ -5,6 +5,6 @@ task pull(type: Exec) {
     commandLine("docker-compose", "pull")
 }
 
-task reloadPrometheus(type: Exec){
-    commandLine("docker-compose", "kill", "-s=HUP", "prometheus")
+task reloadPrometheus(type: Exec) {
+    commandLine("docker-compose", "kill", "-sSIGHUP", "prometheus")
 }
