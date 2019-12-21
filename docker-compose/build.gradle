@@ -13,6 +13,10 @@ task up(type: Exec) {
     }
 }
 
+task down(type: Exec) {
+    commandLine("docker-compose", "down")
+}
+
 task pull(type: Exec) {
     commandLine("docker-compose", "pull")
 }
