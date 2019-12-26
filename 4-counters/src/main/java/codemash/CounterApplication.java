@@ -18,10 +18,11 @@ public class CounterApplication {
     Counter counter;
 
     public CounterApplication() {
-        counter = Counter.builder("composite")
-                .description("a simple counter")
+        counter = Counter.builder("prometheus.scrapes")
+                .description("the number or prometheus scrapes")
                 .baseUnit("thing")
                 .tag("conference", "codemash")
+                .tag("format", "prometheus")
                 .register(prometheusMeterRegistry);
     }
 
