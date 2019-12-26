@@ -35,7 +35,10 @@ public class RegistryTest {
         composite.counter("simple").increment();
 
         composite.getRegistries()
-                .forEach(registry -> assertThat(registry.getMeters()).hasSize(1));
+                .forEach(registry -> {
+                    assertThat(registry.getMeters()).hasSize(1);
+                    assertThat(registry.get("simple").counter().count()).isEqualTo(1);
+                });
     }
 
     @Test
@@ -70,6 +73,26 @@ public class RegistryTest {
         };
         SimpleMeterRegistry registry = new SimpleMeterRegistry(config, Clock.SYSTEM);
     }
+
+    @Test
+    void canModifyMeterIds() {
+        MeterRegistry registry = new SimpleMeterRegistry();
+        registry.config().meterFilter(new MeterFilter() {
+            @Override
+            public Meter.Id map(Meter.Id id) {
+                return id.withName("new").withTag(Tag.of("extra", "tag"));
+            }
+        });
+
+        registry.counter("old");
+
+        assertThat(registry.getMeters()).hasSize(1);
+        assertThat(registry.find("old").counters()).hasSize(0);
+        assertThat(registry.get("new").counters()).hasSize(1);
+        assertThat(registry.get("new").counter().getId().getTag("extra")).isEqualTo("tag");
+
+    }
+
 
     @Test
     void canRemoveMeters() {
