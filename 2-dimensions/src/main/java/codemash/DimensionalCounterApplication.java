@@ -21,14 +21,19 @@ public class DimensionalCounterApplication {
 
     @GetMapping(value = {"/", "/scrape"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public String scrape() {
+        //+=1
         Counter.builder("dimensional")
                 .tag("increment-by", "one")
                 .tag("conference", "codemash")
                 .register(meterRegistry).increment(1);
+
+        //+=2
         Counter.builder("dimensional")
                 .tag("increment-by", "two")
                 .tag("conference", "codemash")
                 .register(meterRegistry).increment(2);
+
+        //+=3
         Counter.builder("dimensional")
                 .tag("increment-by", "three")
                 .tag("conference", "codemash")
