@@ -18,7 +18,7 @@ public class RegistryApplication {
 
     public RegistryApplication(MeterRegistry composite, PrometheusMeterRegistry prometheus) {
         this.prometheus = prometheus;
-        //TODO fix this metric name without editing this file
+        //TODO fix the meter name without editing this file
         this.counter = composite.counter("pormetheos.scrapes");
     }
 
