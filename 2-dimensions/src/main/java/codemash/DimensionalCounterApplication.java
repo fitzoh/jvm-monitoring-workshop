@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class DimensionalCounterApplication {
 
-    PrometheusMeterRegistry meterRegistry;
+    PrometheusMeterRegistry meterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 
     public DimensionalCounterApplication() {
-        meterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
         meterRegistry.config().commonTags("conference", "codemash");
     }
 
