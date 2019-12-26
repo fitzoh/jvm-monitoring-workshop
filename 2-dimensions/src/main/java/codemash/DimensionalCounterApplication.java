@@ -1,5 +1,6 @@
 package codemash;
 
+import io.micrometer.core.instrument.Counter;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import org.springframework.boot.SpringApplication;
@@ -14,19 +15,24 @@ public class DimensionalCounterApplication {
 
     PrometheusMeterRegistry meterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 
-    public DimensionalCounterApplication() {
-        meterRegistry.config().commonTags("conference", "codemash");
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(DimensionalCounterApplication.class, args);
     }
 
     @GetMapping(value = {"/", "/scrape"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public String scrape() {
-        meterRegistry.counter("dimensional", "increment-by", "one").increment(1);
-        meterRegistry.counter("dimensional", "increment-by", "two").increment(2);
-        meterRegistry.counter("dimensional", "increment-by", "three").increment(3);
+        Counter.builder("dimensional")
+                .tag("increment-by", "one")
+                .tag("conference", "codemash")
+                .register(meterRegistry).increment(1);
+        Counter.builder("dimensional")
+                .tag("increment-by", "two")
+                .tag("conference", "codemash")
+                .register(meterRegistry).increment(2);
+        Counter.builder("dimensional")
+                .tag("increment-by", "three")
+                .tag("conference", "codemash")
+                .register(meterRegistry).increment(3);
         return meterRegistry.scrape();
     }
 }

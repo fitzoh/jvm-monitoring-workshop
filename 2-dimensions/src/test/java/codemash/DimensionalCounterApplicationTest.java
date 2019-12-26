@@ -28,28 +28,6 @@ class DimensionalCounterApplicationTest {
     }
 
     @Test
-    void canHaveCommonTags() {
-        MeterRegistry registry = new SimpleMeterRegistry();
-        registry.config().commonTags("conference", "codemash");
-        Counter counter = registry.counter("counter", "key", "value");
-
-        assertThat(counter.getId().getTags()).hasSize(2);
-    }
-
-    @Test
-    void orderingMatters() {
-        MeterRegistry registry = new SimpleMeterRegistry();
-        Counter counter1 = registry.counter("counter", "key", "value");
-        registry.config().commonTags("conference", "codemash");
-        Counter counter2 = registry.counter("counter", "key", "value");
-
-
-        assertThat(counter1.getId().getTags()).hasSize(1);
-        assertThat(counter2.getId().getTags()).hasSize(2);
-        assertThat(counter1).isNotEqualTo(counter2);
-    }
-
-    @Test
     void canAlsoAddTagsWithTheLongFormBuilder() {
         MeterRegistry registry = new SimpleMeterRegistry();
         Counter.builder("counter")
