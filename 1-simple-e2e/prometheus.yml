@@ -1,7 +1,15 @@
+# See https://prometheus.io/docs/prometheus/latest/configuration/configuration/#configuration-file
+# for a full configuration file reference
+
+# Tell Prometheus to scrape the app for updated metrics every 5 seconds
+# In the real world this will probably be higher (30s or 1m)
+# We're using a smaller scrape interval for faster feedback because this is just a demo
 global:
   scrape_interval:     5s
 
 scrape_configs:
+  # we have a single job/application which we're scraping, and we're using a static configuration (no service discovery)
+  # we're telling to hit prometheus at `/scrape` on two hosts... you can probably guess which host is going to work
   - job_name: 'simple-e2e-app'
     metrics_path: /scrape
     static_configs:
