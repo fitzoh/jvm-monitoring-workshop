@@ -27,7 +27,7 @@ dependencies {
 task activatePrometheusConfig(type: Copy) {
     from project.file("prometheus.yml")
     into project(":docker-compose").project.file("prometheus/active/")
-    finalizedBy(":docker-compose:reloadPrometheus")
+    finalizedBy(":docker-compose:restartPrometheus")
 }
 
 bootRun.dependsOn(activatePrometheusConfig)

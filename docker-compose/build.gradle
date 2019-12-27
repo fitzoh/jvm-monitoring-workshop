@@ -24,3 +24,16 @@ task pull(type: Exec) {
 task reloadPrometheus(type: Exec) {
     commandLine("docker-compose", "kill", "-sSIGHUP", "prometheus")
 }
+
+
+task restartPrometheus doLast {
+    exec {
+        commandLine("docker-compose", "stop", "prometheus")
+    }
+    exec {
+        commandLine("docker-compose", "rm", "-f", "prometheus")
+    }
+    exec {
+        commandLine("docker-compose", "up", "-d", "prometheus")
+    }
+}

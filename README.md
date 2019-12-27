@@ -27,7 +27,8 @@ The primary tasks you'll be concerned with are the [Docker Compose](https://docs
 * `./gradlew docker-compose:up`: Starts the containers for Prometheus and Grafana and friends
 * `./gradlew docker-compose:down`: Stops all the workshop containers
 * `./gradlew docker-compose:pull`: Pulls the images for each of the containers we're going to use.  You shouldn't need to run this manually, as it's called by the `./gradlew precompile` task
-* `./gradlew docker-compose:reloadPrometheus`: Sends a `SIGHUP` interrupt to the Prometheus container, prompting it to reload it's configuration file
+* `./gradlew docker-compose:restartPrometheus`: Restarts the Prometheus container, clearing existing metrics and reloading the configuration file
+* `./gradlew docker-compose:reloadPrometheus`: Sends a `SIGHUP` interrupt to the Prometheus container, reloading configuration without deleting existing data
 
 ### Spring Boot tasks
 

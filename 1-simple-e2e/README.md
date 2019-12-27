@@ -14,7 +14,7 @@ The spring boot endpoint can then be accessed at http://localhost:8001/
 
 The `bootRun` command has an added hook that causes it to:
 * copy `prometheus.yml` to the Prometheus config volume
-* send a `SIGHUP` command to the Prometheus container causing it to reload configuration
+* restart the Prometheus container causing it to reload configuration
 That pattern is used throughout this repository
 
 The Prometheus UI can be accessed at http://localhost:9090/
