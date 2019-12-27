@@ -7,6 +7,14 @@ resource "aws_ecs_task_definition" "node_exporter" {
     name      = "host"
     host_path = "/"
   }
+  volume {
+    name      = "sys"
+    host_path = "/sys"
+  }
+  volume {
+    name      = "proc"
+    host_path = "/proc"
+  }
 }
 
 resource "aws_ecs_service" "node_exporter" {

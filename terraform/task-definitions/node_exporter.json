@@ -12,13 +12,25 @@
       }
     ],
     "pidMode": "host",
+    "networkMode": "host",
     "mountPoints": [
       {
         "sourceVolume": "host",
-        "containerPath": "/host",
-        "readOnly": true
+        "containerPath": "/host/root"
+      },
+      {
+        "sourceVolume": "sys",
+        "containerPath": "/host/sys"
+      },
+      {
+        "sourceVolume": "proc",
+        "containerPath": "/host/proc"
       }
     ],
-    "command": ["--path.rootfs=/host"]
+    "command": [
+      "--path.procfs=/host/proc",
+      "--path.sysfs=/host/sys",
+      "--path.rootfs=/host/root"
+    ]
   }
 ]
