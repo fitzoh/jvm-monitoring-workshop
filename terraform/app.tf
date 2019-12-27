@@ -59,6 +59,13 @@ resource "aws_security_group" "app" {
     to_port     = 8080
     cidr_blocks = ["0.0.0.0/0"]
   }
+  //node exporter
+  ingress {
+    from_port   = 9100
+    protocol    = "tcp"
+    to_port     = 9100
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
     from_port   = 0
     to_port     = 0

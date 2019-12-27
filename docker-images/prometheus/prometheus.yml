@@ -14,3 +14,11 @@ scrape_configs:
         filters:
           - name: "tag:Workload"
             values: ['spring-boot']
+  - job_name: 'node-exporter'
+    metrics_path: /metrics
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 9100
+        filters:
+          - name: "tag:Workload"
+            values: ['*']

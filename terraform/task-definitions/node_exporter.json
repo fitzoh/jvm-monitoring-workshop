@@ -1,0 +1,24 @@
+[
+  {
+    "name": "node-exporter",
+    "image": "prom/node-exporter",
+    "cpu": 1,
+    "memory": 256,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 9100,
+        "hostPort": 9100
+      }
+    ],
+    "pidMode": "host",
+    "mountPoints": [
+      {
+        "sourceVolume": "host",
+        "containerPath": "/host",
+        "readOnly": true
+      }
+    ],
+    "command": ["--path.rootfs=/host"]
+  }
+]
