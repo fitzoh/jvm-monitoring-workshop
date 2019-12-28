@@ -1,10 +1,10 @@
 # 2: Dimensions
 
 This application adds a small twist on the first.
-Instead of a single counter, there are three counters with the same name but different tags.
+Instead of a single counter, there are multiple counters with the same name but different tags.
+They also increment by different amounts.
 
-The Prometheus configuration has also been modified a bit.
-This app is actually being scraped by 2 different jobs (meaning it's recorded twice with different labels).
+The `primary` counters are always incremented on scrape, the `secondary` counters only occasionally/randomly.
 
 Note that this application (and most subsequent applications) contains some tests to help demonstrate concepts.
 
@@ -19,14 +19,14 @@ Note that this application (and most subsequent applications) contains some test
    * `=~`: Select labels that regex-match the provided string.
    * `!~`: Select labels that do not regex-match the provided string.
 4. Create a dashboard with the following graphs:
-   * Just the time series from the `dimensional-app` `job` where `increment_by` = `one`
-   * All the time series where the `conference` = `codemash`
-   * All the time series that ended up at the wrong conference
-   * All the time series where `increment_by` starts with `t`.
+   * All the time series where the `conference` = `codemash` (which happens to be all of them)
+   * All the time series where `delta` = `one`
+   * All the time series where `delta` starts with `t`.
 5. Read through the docs on [aggregation operations](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators)
 6. Add the following graphs to the dashboard:
-   * Sum of all the time series together
-   * Sum of the time series by `conference` (excluding `codemash`)
+   * Sum all the time series together
+   * Sum all the time series by `method`
+   * The top 3 time series (they might change occasionally)
    * The count of the total number of time series (try changing visualization type)
-   * The count of time series by `conference` (try changing visualization type)
+   * The count of time series by `delta` (try changing visualization type)
          

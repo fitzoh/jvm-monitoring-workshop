@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @RestController
 @SpringBootApplication
 public class DimensionalCounterApplication {
@@ -21,27 +23,55 @@ public class DimensionalCounterApplication {
 
     @GetMapping(value = {"/", "/scrape"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public String scrape() {
-        //+=1
+        primary();
+        if (ThreadLocalRandom.current().nextFloat() < .3) {
+            secondary();
+        }
+        return meterRegistry.scrape();
+    }
+
+    private void primary() {
         Counter.builder("dimensional")
-                //Notice the description
+                //Notice we only need to define the description once
                 .description("a counter that has multiple dimensions")
-                .tag("increment-by", "one")
                 .tag("conference", "codemash")
+                .tag("method", "primary")
+                .tag("delta", "one")
                 .register(meterRegistry).increment(1);
 
-        //+=2
         Counter.builder("dimensional")
-                //Notice the lack of description (only one per name)
-                .tag("increment-by", "two")
-                .tag("conference", "some-other-conference")
+                .tag("conference", "codemash")
+                .tag("method", "primary")
+                .tag("delta", "two")
                 .register(meterRegistry).increment(2);
 
-        //+=3
         Counter.builder("dimensional")
-                .tag("increment-by", "three")
-                .tag("conference", "also-the-wrong-conference")
+                .tag("conference", "codemash")
+                .tag("method", "primary")
+                .tag("delta", "three")
                 .register(meterRegistry).increment(3);
 
-        return meterRegistry.scrape();
+    }
+
+    private void secondary() {
+        Counter.builder("dimensional")
+                .tag("conference", "codemash")
+                .tag("method", "secondary")
+                .tag("increment-by", "one")
+                .register(meterRegistry).increment(1);
+
+        Counter.builder("dimensional")
+                .description("a counter that has multiple dimensions")
+                .tag("conference", "codemash")
+                .tag("method", "secondary")
+                .tag("increment-by", "two")
+                .register(meterRegistry).increment(2);
+
+        Counter.builder("dimensional")
+                .description("a counter that has multiple dimensions")
+                .tag("conference", "codemash")
+                .tag("method", "secondary")
+                .tag("increment-by", "three")
+                .register(meterRegistry).increment(3);
     }
 }
