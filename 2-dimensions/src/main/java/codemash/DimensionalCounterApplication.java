@@ -57,21 +57,21 @@ public class DimensionalCounterApplication {
         Counter.builder("dimensional")
                 .tag("conference", "codemash")
                 .tag("method", "secondary")
-                .tag("increment-by", "one")
+                .tag("delta", "one")
                 .register(meterRegistry).increment(1);
 
         Counter.builder("dimensional")
                 .description("a counter that has multiple dimensions")
                 .tag("conference", "codemash")
                 .tag("method", "secondary")
-                .tag("increment-by", "two")
+                .tag("delta", "two")
                 .register(meterRegistry).increment(2);
 
         Counter.builder("dimensional")
                 .description("a counter that has multiple dimensions")
                 .tag("conference", "codemash")
                 .tag("method", "secondary")
-                .tag("increment-by", "three")
+                .tag("delta", "three")
                 .register(meterRegistry).increment(3);
     }
 }
