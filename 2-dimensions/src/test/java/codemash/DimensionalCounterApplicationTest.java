@@ -23,7 +23,6 @@ class DimensionalCounterApplicationTest {
         assertThat(counter1.getId()).isEqualTo(counter2.getId());
         //Note that this is reference equality, it pulled out the cached instance
         assertThat(counter1).isSameAs(counter2);
-
     }
 
     @Test
