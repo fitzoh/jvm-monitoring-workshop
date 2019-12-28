@@ -23,21 +23,25 @@ public class DimensionalCounterApplication {
     public String scrape() {
         //+=1
         Counter.builder("dimensional")
+                //Notice the description
+                .description("a counter that has multiple dimensions")
                 .tag("increment-by", "one")
                 .tag("conference", "codemash")
                 .register(meterRegistry).increment(1);
 
         //+=2
         Counter.builder("dimensional")
+                //Notice the lack of description (only one per name)
                 .tag("increment-by", "two")
-                .tag("conference", "codemash")
+                .tag("conference", "some-other-conference")
                 .register(meterRegistry).increment(2);
 
         //+=3
         Counter.builder("dimensional")
                 .tag("increment-by", "three")
-                .tag("conference", "codemash")
+                .tag("conference", "also-the-wrong-conference")
                 .register(meterRegistry).increment(3);
+
         return meterRegistry.scrape();
     }
 }
