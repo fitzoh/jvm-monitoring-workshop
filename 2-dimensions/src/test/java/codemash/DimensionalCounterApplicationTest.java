@@ -37,6 +37,7 @@ class DimensionalCounterApplicationTest {
 
     /**
      * All Meters have a long form builder with more options
+     * Also, the description becomes the prometheus HELP string
      */
     @Test
     void canAlsoAddTagsWithTheLongFormBuilder() {
