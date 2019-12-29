@@ -3,9 +3,13 @@ package codemash;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import io.micrometer.prometheus.PrometheusConfig;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class DimensionalCounterApplicationTest {
 
@@ -32,6 +36,34 @@ class DimensionalCounterApplicationTest {
         Counter counter2 = registry.counter("counter", "key", "value2");
 
         assertThat(counter1).isNotEqualTo(counter2);
+    }
+
+    /**
+     * Prometheus requires that any time series with the same name have the same set of label keys
+     */
+    @Test
+    void prometheusRequiresMetersWithTheSameNameHaveTheSameLabelKeys() {
+        PrometheusMeterRegistry prometheusMeterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+
+        ThrowableAssert.ThrowingCallable notGonnaWork = () -> {
+            prometheusMeterRegistry.counter("counter", "key", "value");
+            prometheusMeterRegistry.counter("counter", "differentKey", "value2");
+        };
+
+        assertThatThrownBy(notGonnaWork)
+                .hasMessage("Prometheus requires that all meters with the same name have the same set of tag keys. " +
+                        "There is already an existing meter named 'counter_total' containing tag keys [key]. " +
+                        "The meter you are attempting to register has keys [differentKey].");
+    }
+
+    /**
+     * But some monitoring systems allow it, so micrometer allows it for non-prometheus registries
+     */
+    @Test
+    void butMicrometerAllowsIt() {
+        SimpleMeterRegistry registry = new SimpleMeterRegistry();
+        registry.counter("counter", "key", "value");
+        registry.counter("counter", "differentKey", "value");
     }
 
     /**
