@@ -9,7 +9,7 @@ The `primary` counters are always incremented on scrape, the `secondary` counter
 Note that this application (and most subsequent applications) contains some tests to help demonstrate concepts.
 
 ## Your tasks
-1. Check out the source code (and tests!), start the app
+1. Check out the source code (and tests!), start the app (`./gradlew 2-dimensions:bootRun` from repo root)
 2. Look at the new items present at the scrape endpoint
    * help/description string
    * labels
