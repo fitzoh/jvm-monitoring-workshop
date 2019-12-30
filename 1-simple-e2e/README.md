@@ -4,7 +4,7 @@ All commands should be run from the root of the repository.
 
 First, start up the Docker containers:
 
-`./graddlew docker-compose:up`
+`./gradlew docker-compose:up`
 
 To start the sample application:
 
