@@ -42,7 +42,7 @@ public class ActuatorApplication {
         } else if (roll < .8){
             return latencyGenerator.slow();
         } else {
-            return latencyGenerator.reallySLow();
+            return latencyGenerator.reallySlow();
         }
     }
 }

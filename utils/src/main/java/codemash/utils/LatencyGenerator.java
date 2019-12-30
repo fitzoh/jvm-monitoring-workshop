@@ -28,7 +28,7 @@ public class LatencyGenerator {
         return randomRange(maxMedium, maxSlow);
     }
 
-    public Duration reallySLow() {
+    public Duration reallySlow() {
         return randomRange(maxSlow, maxReallySlow);
     }
 
