@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class CounterApplication {
 
     PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+    //TODO add a counter to track this value
     AtomicLong delta = new AtomicLong(1);
 
     public static void main(String[] args) {
@@ -23,6 +24,7 @@ public class CounterApplication {
 
     @GetMapping(value = {"/", "/scrape"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public String scrape() {
+        //TODO add meaningful tags to these counters
         registry.counter("prometheus.scrapes", "delta", "TODO").increment();
         registry.counter("prometheus.scrapes", "delta", "TODO").increment(2);
         registry.counter("prometheus.scrapes", "delta", "TODO").increment(delta.getAndIncrement());
