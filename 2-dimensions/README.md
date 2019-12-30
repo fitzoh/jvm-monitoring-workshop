@@ -21,7 +21,7 @@ Note that this application (and most subsequent applications) contains some test
 4. Create a dashboard with the following graphs:
    * All the time series where the `conference` = `codemash` (which happens to be all of them)
    * All the time series where `delta` = `one`
-   * All the time series where `delta` starts with `t`.
+   * All the time series where `delta` != `one` (trying finding multiple ways to accomplish this one)
 5. Read through the docs on [aggregation operations](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators)
 6. Add the following graphs to the dashboard:
    * Sum all the time series together
