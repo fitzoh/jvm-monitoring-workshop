@@ -9,10 +9,10 @@ You have a couple tasks to accomplish by applying `MeterFilters` to the `MeterRe
 
 1. Add a `registry:prometheus` tag to the `PrometheusMeterRegistry`, and a `format:log` tag to the `LoggingMeterRegistry`
 2. Add a `registry:log` tag to the `LoggingMeterRegistry`
-3. Add a `conference:codemash` tag to all registries
+3. Add a `conference:codemash` tag to all registries (should only need to update a single registry for this)
 4. Fix the name of the `pormetheos.scrapes` `Counter` without modifying `RegistryApplication`
 
-The last one will be the trickiest, as it doesn't have a prebuilt helper ()
+The last one will be the trickiest, as it doesn't have a prebuilt helper.
 You will most likely find the tests useful.
 
 You can find full docs on MeterFilters [here](https://micrometer.io/docs/concepts#_meter_filters).
