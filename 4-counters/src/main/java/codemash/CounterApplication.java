@@ -1,6 +1,5 @@
 package codemash;
 
-import io.micrometer.core.instrument.Counter;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import org.springframework.boot.SpringApplication;
@@ -9,31 +8,24 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 @RestController
 @SpringBootApplication
 public class CounterApplication {
 
-    PrometheusMeterRegistry prometheusMeterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
-
-    Counter counter;
-
-    public CounterApplication() {
-        counter = Counter.builder("prometheus.scrapes")
-                .description("the number or prometheus scrapes")
-                .baseUnit("thing")
-                .tag("conference", "codemash")
-                .tag("format", "prometheus")
-                .register(prometheusMeterRegistry);
-    }
+    PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+    AtomicLong delta = new AtomicLong(1);
 
     public static void main(String[] args) {
         SpringApplication.run(CounterApplication.class, args);
     }
 
-
     @GetMapping(value = {"/", "/scrape"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public String scrape() {
-        counter.increment();
-        return prometheusMeterRegistry.scrape();
+        registry.counter("prometheus.scrapes", "delta", "TODO").increment();
+        registry.counter("prometheus.scrapes", "delta", "TODO").increment(2);
+        registry.counter("prometheus.scrapes", "delta", "TODO").increment(delta.getAndIncrement());
+        return registry.scrape();
     }
 }
