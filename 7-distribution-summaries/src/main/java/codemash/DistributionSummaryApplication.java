@@ -1,12 +1,10 @@
 package codemash;
 
+import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.MeterRegistry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
@@ -16,23 +14,22 @@ import org.springframework.web.server.ServerWebExchange;
 @SpringBootApplication
 public class DistributionSummaryApplication {
 
+    DistributionSummary summary;
 
-    Logger log = LoggerFactory.getLogger(DistributionSummaryApplication.class);
-
-    //TODO create a distribution summary and record the file upload sizes
-    //TODO also track the ids, which should be a super boring distribution
     public DistributionSummaryApplication(MeterRegistry registry) {
+        //TODO record the file upload sizes and publish SLA buckets for each power of 2
+        summary = DistributionSummary.builder("upload.size")
+                .register(registry);
     }
 
     public static void main(String[] args) {
         SpringApplication.run(DistributionSummaryApplication.class, args);
     }
 
-    @PostMapping(value = {"/upload/{id}"}, produces = MediaType.TEXT_PLAIN_VALUE)
-    public String upload(ServerWebExchange exchange, @PathVariable int id) throws Exception {
+    @PostMapping(value = {"/upload"}, produces = MediaType.TEXT_PLAIN_VALUE)
+    public String upload(ServerWebExchange exchange) throws Exception {
         long contentLength = exchange.getRequest().getHeaders().getContentLength();
-        return String.format("id = %d, Content-Length = %d", id, contentLength);
+        return String.format("Content-Length = %d", contentLength);
     }
-
 
 }

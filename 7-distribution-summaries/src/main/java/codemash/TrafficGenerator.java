@@ -26,20 +26,21 @@ public class TrafficGenerator implements ApplicationListener<ApplicationReadyEve
                 .build();
         //TODO configure the distribution min/max values and publish percentiles,
         //TODO then instrument the code to record the exponent
-        summary = DistributionSummary.builder("exponent").register(registry);
+        summary = DistributionSummary.builder("exponent")
+                .register(registry);
 
     }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         Flux.interval(Duration.ofMillis(50))
-                .flatMap(this::postRandomPayload)
+                .flatMap(ignored -> this.postRandomPayload())
                 .subscribe();
     }
 
 
-    private Mono<ClientResponse> postRandomPayload(long counter) {
-        return client.post().uri("/upload/{id}", counter).bodyValue(randomPayload()).exchange();
+    private Mono<ClientResponse> postRandomPayload() {
+        return client.post().uri("/upload").bodyValue(randomPayload()).exchange();
     }
 
 
