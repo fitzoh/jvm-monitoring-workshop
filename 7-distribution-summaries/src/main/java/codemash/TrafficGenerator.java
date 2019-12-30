@@ -24,7 +24,7 @@ public class TrafficGenerator implements ApplicationListener<ApplicationReadyEve
     public TrafficGenerator(@Value("${server.port}") String port, WebClient.Builder builder, MeterRegistry registry) {
         client = builder.baseUrl("http://localhost:" + port)
                 .build();
-        //TODO configure the distribution min/max values and publish percentiles,
+        //TODO configure the distribution min/max values and publish percentile histogram,
         //TODO then instrument the code to record the exponent
         summary = DistributionSummary.builder("exponent")
                 .register(registry);
