@@ -6,6 +6,7 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets: ['localhost:9090']
+
   - job_name: 'spring-boot'
     metrics_path: /actuator/prometheus
     ec2_sd_configs:
@@ -14,6 +15,7 @@ scrape_configs:
         filters:
           - name: "tag:Workload"
             values: ['spring-boot']
+
   - job_name: 'node-exporter'
     metrics_path: /metrics
     ec2_sd_configs:
