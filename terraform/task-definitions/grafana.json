@@ -1,0 +1,32 @@
+[
+  {
+    "name": "grafana",
+    "image": "grafana/grafana",
+    "memoryReservation": 512,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ],
+    "environment": [
+      {
+        "name":  "GF_DATABASE_TYPE",
+        "value": "postgres"
+      },
+      {
+        "name":  "GF_DATABASE_HOST",
+        "value": "${db_endpoint}"
+      },
+      {
+        "name":  "GF_DATABASE_USER",
+        "value": "codemash"
+      },
+      {
+        "name":  "GF_DATABASE_PASSWORD",
+        "value": "codemash"
+      }
+    ]
+  }
+]

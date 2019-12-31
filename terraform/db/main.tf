@@ -29,4 +29,6 @@ resource "aws_security_group" "db" {
   }
 }
 
-
+output "db_endpoint" {
+  value = aws_rds_cluster.app.endpoint
+}
