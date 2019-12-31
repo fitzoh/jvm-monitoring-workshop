@@ -15,4 +15,4 @@ You have a couple tasks to accomplish by applying `MeterFilters` to the `MeterRe
 The last one will be the trickiest, as it doesn't have a prebuilt helper.
 You will most likely find the tests useful.
 
-You can find full docs on MeterFilters [here](https://micrometer.io/docs/concepts#_meter_filters).
+You can find full docs on `MeterFilter`s [here](https://micrometer.io/docs/concepts#_meter_filters).
