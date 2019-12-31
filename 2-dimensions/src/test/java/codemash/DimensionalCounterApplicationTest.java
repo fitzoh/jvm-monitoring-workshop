@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class DimensionalCounterApplicationTest {
 
     /**
-     * If the name, tags, and type (counter vs gauge vs timer etc) are the same, the meters are the same
+     * If the name, tags, and type (counter/gauge/timer/etc) are the same, the meters are the same
      * Duplicate counters incur a small penalty (hash map lookup),
      * so if you're in a tight loop store a reference if you can
      */
