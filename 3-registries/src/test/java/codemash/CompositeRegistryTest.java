@@ -62,6 +62,11 @@ public class CompositeRegistryTest {
         assertThat(Metrics.counter("global")).isInstanceOf(Counter.class);
     }
 
+
+    /**
+     * You probably won't care about this, but it's nice for library/framework authors
+     * This enables you to pull micrometer configuration parameters (API keys, etc.) from an external datasource
+     */
     @Test
     void canSetConfigProperties() {
         Map<String, String> externalConfig = new HashMap<>();
