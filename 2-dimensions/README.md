@@ -13,7 +13,8 @@ Note that this application (and most subsequent applications) contains some test
 2. Look at the new items present at the scrape endpoint
    * help/description string
    * labels
-3. Experiment with the time series selectors documented [here](https://prometheus.io/docs/prometheus/latest/querying/basics/#time-series-selectors) (descriptions below shamelessly stolen from that link)
+3. Experiment with the time series selectors documented [here](https://prometheus.io/docs/prometheus/latest/querying/basics/#time-series-selectors) (descriptions below shamelessly stolen from that link).
+You might also find the samples in `selectors.sql` useful.
    * `=`: Select labels that are exactly equal to the provided string.
    * `!=`: Select labels that are not equal to the provided string.
    * `=~`: Select labels that regex-match the provided string.
