@@ -1,6 +1,5 @@
 package codemash;
 
-import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,9 +13,13 @@ import java.util.concurrent.atomic.AtomicLong;
 @SpringBootApplication
 public class CounterApplication {
 
-    PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+    PrometheusMeterRegistry registry;
     //TODO add a counter to track this value
     AtomicLong delta = new AtomicLong(1);
+
+    public CounterApplication(PrometheusMeterRegistry registry) {
+        this.registry = registry;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(CounterApplication.class, args);
