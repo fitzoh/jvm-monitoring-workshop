@@ -57,7 +57,7 @@ public class DistributionSummaryTest {
     void youCanSetBoundaries() {
         DistributionSummary.builder("upload.size")
                 .baseUnit("byte")
-                .minimumExpectedValue(0L)
+                .minimumExpectedValue(1L)
                 .maximumExpectedValue(50L)
                 .publishPercentileHistogram()
                 .register(registry);
