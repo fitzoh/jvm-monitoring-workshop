@@ -35,5 +35,3 @@ The primary tasks you'll be concerned with are the [Docker Compose](https://docs
 * `./gradlew <directory>:bootRun`: Starts the Spring Boot app in `<directory>`.  The `bootRun` tasks have a hook added to copy the directory's Prometheus config file to the `docker-compose` directory and reload.
 
 Each spring boot app runs at port 8000 + the numeric prefix, so exercise `1` runs on port `8001`, and exercise `5` runs on port `8005`.
-
-Tip: You can use prefixes for gradle tasks, so if you're feeling lazy you can run `./gradlew 1:bootRun` instead of `./gradlew 1-simple-e2e:bootRun`
