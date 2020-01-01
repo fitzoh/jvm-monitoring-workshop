@@ -13,9 +13,12 @@ import java.util.concurrent.atomic.AtomicLong;
 @SpringBootApplication
 public class CounterApplication {
 
-    PrometheusMeterRegistry registry;
+    public static final String PROMETHEUS_SCRAPES = "prometheus.scrapes";
+
     //TODO add a counter to track this value
-    AtomicLong delta = new AtomicLong(1);
+    private final AtomicLong delta = new AtomicLong(1);
+    private final PrometheusMeterRegistry registry;
+
 
     public CounterApplication(PrometheusMeterRegistry registry) {
         this.registry = registry;
