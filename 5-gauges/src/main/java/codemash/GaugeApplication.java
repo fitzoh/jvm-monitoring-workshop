@@ -1,7 +1,7 @@
 package codemash;
 
-import io.micrometer.prometheus.PrometheusConfig;
-import io.micrometer.prometheus.PrometheusMeterRegistry;
+import io.micrometer.core.instrument.Gauge;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -19,14 +19,14 @@ import java.util.UUID;
 @SpringBootApplication
 public class GaugeApplication {
 
-
-    Logger log = LoggerFactory.getLogger(GaugeApplication.class);
-    PrometheusMeterRegistry prometheusMeterRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+    private static final Logger log = LoggerFactory.getLogger(GaugeApplication.class);
+    private final MeterRegistry meterRegistry;
 
     //TODO use this when you refactor your instrumentation
-    ActiveSessions activeSessions;
+    private final ActiveSessions activeSessions;
 
-    public GaugeApplication(ActiveSessions activeSessions) {
+    public GaugeApplication(MeterRegistry meterRegistry, ActiveSessions activeSessions) {
+        this.meterRegistry = meterRegistry;
         this.activeSessions = activeSessions;
     }
 
@@ -36,7 +36,7 @@ public class GaugeApplication {
 
 
     //TODO instrument this to track the total number of active sessions
-    @GetMapping(value = {"/"}, produces = MediaType.TEXT_PLAIN_VALUE)
+    @GetMapping(value = {"/", "/ping"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public Flux<ServerSentEvent<String>> sse() {
         UUID sessionId = UUID.randomUUID();
         return Flux.interval(Duration.ofSeconds(1))
@@ -50,10 +50,5 @@ public class GaugeApplication {
                 .doOnCancel(() -> {
                     log.info("cancelled SSE Stream, session = {}", sessionId);
                 });
-    }
-
-    @GetMapping(value = {"/scrape"}, produces = MediaType.TEXT_PLAIN_VALUE)
-    public String scrape() {
-        return prometheusMeterRegistry.scrape();
     }
 }
