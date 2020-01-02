@@ -6,6 +6,7 @@ In this example, we have a `LoggingMeterRegistry` and a `PrometheusMeterRegistry
 This means that any `Meter` added to the `CompositeMeterRegistry` will also be added to the other registries.
 
 You have a couple tasks to accomplish by applying `MeterFilters` to the `MeterRegistry`'s listed above.
+No dashboards with for one, just some code to tweak.
 
 1. Add a `registry:prometheus` tag to the `PrometheusMeterRegistry`, and a `format:log` tag to the `LoggingMeterRegistry`
 2. Add a `registry:log` tag to the `LoggingMeterRegistry`
