@@ -41,8 +41,15 @@ public class GaugeApplication {
         UUID sessionId = UUID.randomUUID();
         return Flux.interval(Duration.ofSeconds(1))
                 .map(i -> ServerSentEvent.builder("ping " + sessionId).build())
-                .doOnSubscribe(ignored -> log.info("starting SSE stream, session = {}", sessionId))
-                .doOnCancel(() -> log.info("cancelled SSE Stream, session = {}", sessionId));
+                .doOnSubscribe(ignored -> {
+                    log.info("starting SSE stream, session = {}", sessionId);
+                })
+                .doOnEach(signal -> {
+                    log.debug("pinging {}", sessionId);
+                })
+                .doOnCancel(() -> {
+                    log.info("cancelled SSE Stream, session = {}", sessionId);
+                });
     }
 
     @GetMapping(value = {"/scrape"}, produces = MediaType.TEXT_PLAIN_VALUE)
