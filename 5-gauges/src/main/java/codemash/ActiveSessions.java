@@ -40,28 +40,28 @@ public class ActiveSessions {
     /**
      * @return the number of pings for the session with the most pings, or 0 if there are no active sessions
      */
-    public long max() {
+    public long maxPingCount() {
         return sessions.values().stream().mapToLong(AtomicLong::longValue).max().orElse(0);
     }
 
     /**
      * @return the number of pings for the session with the least pings, or 0 if there are no active sessions
      */
-    public long min() {
+    public long minPingCount() {
         return sessions.values().stream().mapToLong(AtomicLong::longValue).min().orElse(0);
     }
 
     /**
      * @return the total number of pings across all active sessions
      */
-    public long sum() {
+    public long totalPingCount() {
         return sessions.values().stream().mapToLong(AtomicLong::longValue).sum();
     }
 
     /**
      * @return the total number of active sessions
      */
-    public long count() {
+    public long sessionCount() {
         return sessions.values().size();
     }
 
