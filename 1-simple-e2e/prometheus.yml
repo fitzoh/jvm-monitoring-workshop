@@ -5,7 +5,7 @@
 # In the real world this will probably be higher (30s or 1m)
 # We're using a smaller scrape interval for faster feedback because this is just a demo
 global:
-  scrape_interval:     5s
+  scrape_interval: 5s
 
 scrape_configs:
   # we have a single job/application which we're scraping, and we're using a static configuration (no service discovery)
