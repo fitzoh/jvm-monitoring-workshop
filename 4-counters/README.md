@@ -19,4 +19,11 @@ Counters don't normally reset, but we've included a `/simulate-restart` endpoint
    * Our scrape interval is `1s`, and range vectors should generally be 4x the scrape interval, so you should make sure your range vectors have a minimum of `4s`
    * For very small range intervals Grafana might skip some data points unless you lower the `Min time interval` on the Query panel.
    Generally speaking you're better off sticking with larger time ranges 
-4. TODO
+4. Make a new dashboard!
+    * Show all the `prometheus_scrapes_total` series as instant vectors
+    * Show 15 second rates of all those series... Before graphing them, what would you expect them to look like?
+    * Simulate a couple restarts by triggering the `/simulate-restart` functions, see how the rates respond
+    * Use the `resets` function to create a graph showing when the simulated restarts occured
+    * Graph the `increase` of the non-dynamic counters at a couple different rates (`15s`, `30s`)... Can you guess what those graphs will look like/what values they will have?
+    * The time series showing the value of the `AtomicInteger` has a similar set of labels as the `prometheus_scrapes_total` series.
+    Try adding it to another time series (you might need to check out the docs on [1-1 vector matching](https://prometheus.io/docs/prometheus/latest/querying/operators/#one-to-one-vector-matches))
