@@ -26,4 +26,5 @@ Counters don't normally reset, but we've included a `/simulate-restart` endpoint
     * Use the `resets` function to create a graph showing when the simulated restarts occured
     * Graph the `increase` of the non-dynamic counters at a couple different rates (`15s`, `30s`)... Can you guess what those graphs will look like/what values they will have?
     * The time series showing the value of the `AtomicInteger` has a similar set of labels as the `prometheus_scrapes_total` series.
-    Try adding it to another time series (you might need to check out the docs on [1-1 vector matching](https://prometheus.io/docs/prometheus/latest/querying/operators/#one-to-one-vector-matches))
+    Add it's 15s rate to the 15s rate of the time series that is incremented by 1 every step.
+    These time series have different sets of labels, which means you can't directly add them.  Check out the docs on [1-1 vector matching](https://prometheus.io/docs/prometheus/latest/querying/operators/#one-to-one-vector-matches).
