@@ -1,6 +1,7 @@
 package codemash;
 
 import codemash.utils.LatencyGenerator;
+import io.micrometer.core.instrument.LongTaskTimer;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RestController
 public class TimedEndpoints {
@@ -31,6 +34,11 @@ public class TimedEndpoints {
     private Timer timer(String bucket) {
         return Timer.builder("http.server.requests")
                 .tag("bucket", bucket)
+                .register(meterRegistry);
+    }
+
+    private LongTaskTimer ltt() {
+        return LongTaskTimer.builder("http.server.requests.really.slow")
                 .register(meterRegistry);
     }
 
@@ -70,6 +78,13 @@ public class TimedEndpoints {
     private Callable randomWait() {
         int idx = random.nextInt(waitMethods.size());
         return waitMethods.get(idx);
+    }
+
+    private Duration[] slaBuckets() {
+        return IntStream.range(1, 20)
+                .map(i -> i * 100)
+                .mapToObj(Duration::ofMillis)
+                .collect(Collectors.toList()).toArray(Duration[]::new);
     }
 
 
