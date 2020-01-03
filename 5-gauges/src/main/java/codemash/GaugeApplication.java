@@ -39,7 +39,8 @@ public class GaugeApplication {
     @GetMapping(value = {"/", "/ping"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public Flux<ServerSentEvent<String>> sse() {
         UUID sessionId = UUID.randomUUID();
-        return Flux.interval(Duration.ofSeconds(1))
+        return Flux.range(0, Integer.MAX_VALUE)
+                .delayUntil(i -> Mono.delay(Duration.ofMillis(i * 10)))
                 .map(i -> ServerSentEvent.builder("ping " + sessionId).build())
                 .doOnSubscribe(ignored -> {
                     log.info("starting SSE stream, session = {}", sessionId);

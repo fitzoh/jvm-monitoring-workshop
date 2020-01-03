@@ -1,6 +1,6 @@
 # 5: Gauges
 
-This application has a single [Server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) endpoint that pushes a simple ping payload to all connected clients every second.
+This application has a single [Server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) endpoint that pushes a simple ping payload to all connected clients at a decaying rate (after 10 ms, then 20ms, then 30ms, etc).
 
 We want to keep track of the number of connected clients.
 You can create additional connections by opening multiple browser tabs to [http://localhost:8005/](http://localhost:8005).
