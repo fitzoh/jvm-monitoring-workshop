@@ -2,6 +2,7 @@ package codemash;
 
 import codemash.utils.LatencyGenerator;
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -25,6 +26,12 @@ public class TimedEndpoints {
     public TimedEndpoints(LatencyGenerator latencyGenerator, MeterRegistry meterRegistry) {
         this.latencyGenerator = latencyGenerator;
         this.meterRegistry = meterRegistry;
+    }
+
+    private Timer timer(String bucket) {
+        return Timer.builder("http.server.requests")
+                .tag("bucket", bucket)
+                .register(meterRegistry);
     }
 
     @GetMapping(value = {"/wait"})
