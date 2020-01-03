@@ -11,6 +11,7 @@ import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.UUID;
@@ -36,6 +37,10 @@ public class GaugeApplication {
 
 
     //TODO instrument this to track the total number of active sessions
+
+    /**
+     * @return a decaying Flux of Server Sent Eevents that sends a message after 10ms, then 20ms, then 30ms, etc
+     */
     @GetMapping(value = {"/", "/ping"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public Flux<ServerSentEvent<String>> sse() {
         UUID sessionId = UUID.randomUUID();
