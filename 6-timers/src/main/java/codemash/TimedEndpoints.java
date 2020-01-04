@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @RestController
 public class TimedEndpoints {
@@ -81,9 +81,8 @@ public class TimedEndpoints {
     }
 
     private Duration[] slaBuckets() {
-        return IntStream.range(1, 20)
-                .map(i -> i * 100)
-                .mapToObj(Duration::ofMillis)
+        return Stream.of(10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000)
+                .map(Duration::ofMillis)
                 .collect(Collectors.toList()).toArray(Duration[]::new);
     }
 
