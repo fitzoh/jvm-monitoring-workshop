@@ -27,7 +27,7 @@ public class TrafficGenerator implements ApplicationListener<ApplicationReadyEve
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         Flux.interval(Duration.ofMillis(500))
-                .flatMap(ignored -> client.get().uri("/wait").exchange())
+                .flatMap(ignored -> client.get().uri("/work").exchange())
                 .subscribe(resp -> log.info(resp.statusCode().toString()));
     }
 

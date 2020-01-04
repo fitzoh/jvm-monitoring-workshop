@@ -42,7 +42,7 @@ public class TimedEndpoints {
                 .register(meterRegistry);
     }
 
-    @GetMapping(value = {"/wait"})
+    @GetMapping(value = {"/work"})
     public Mono doWait() {
         return Mono.fromCallable(this.randomWait());
     }
