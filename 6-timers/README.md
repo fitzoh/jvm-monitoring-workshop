@@ -18,5 +18,10 @@ There are a couple tricks you need to do to get a heatmap to render correctly:
    * While you're here, you can try playing with some of the visualization options
 6. Create a histogram that includes all of the latency buckets. 
 Hint: You'll have to sum the time series together to make sure you end up with a single set of `le` values
-7. Add a LongTaskTimer to the `really-slow` bucket
-8. Create a graph tracking the number of in flight `really-slow` tasks.
+7. Update the timer configuration again to publish precomputed values for `p75`, `p90`, and `p99`
+8. Create a graph showing the published percentiles for each bucket.
+   * Try summing the percentiles together across latency buckets.
+   * That was a trap, you shouldn't sum precomputed percentiles! You should calculate them instead by combining histograms
+9. Create a graph showing `p75`, `p90`, and `p99` for all endpoints together by summing their histograms together and using the `histogram_quantile` function (documented [here](https://prometheus.io/docs/prometheus/latest/querying/functions/#histogram_quantile)).    
+10. Add a LongTaskTimer to the `really-slow` bucket
+11. Create a graph tracking the number of in flight `really-slow` tasks.

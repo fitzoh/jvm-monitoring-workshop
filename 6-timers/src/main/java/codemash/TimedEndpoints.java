@@ -68,7 +68,8 @@ public class TimedEndpoints {
         return latency;
     }
 
-    //TODO time this with a long task timer
+    //TODO time this with *both* a timer and a long task timer
+    //TODO (just do the timer at first)
     public Duration reallySlow() throws Exception {
         Duration latency = latencyGenerator.reallySlow();
         Thread.sleep(latency.toMillis());
