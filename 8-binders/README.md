@@ -8,3 +8,4 @@ There's not a whole lot of instrumentation work to do, because the whole point o
 3. Instead of adding a common label through Micrometer, set the `application` label using prometheus relabeling
    * You can either copy the `job` label, or just set a static value
    * Relabeling documentation available [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config)
+4. If you're feel getting crazy, go back to `5-gauges` and create a `MeterBinder` for the `ActiveSessions` class
