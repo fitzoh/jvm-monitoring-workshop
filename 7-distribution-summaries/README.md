@@ -5,6 +5,7 @@ Track the size the of the payload, as well as the exponent used to generate the 
 
 1. Instrument `TrafficGenerator` to record the exponent used
    * Set a min and max value
-   * publish the full histogram
+   * Publish a histogram with 10 SLA buckets
 2. Instrument main application to record file size
    * Publish SLA buckets for each power of 2
+3. Create Heatmaps for both datasets
