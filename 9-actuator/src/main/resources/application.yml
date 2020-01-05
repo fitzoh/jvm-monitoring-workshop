@@ -1,11 +1,22 @@
+spring:
+  application:
+    name: actuator-app
+
 management:
+  # By default the prometheus endpoint isn't exposed.
+  # Let's fix that, and keep the health/info endpoints exposed as well
   endpoints:
     web:
       exposure:
         include: health,info,prometheus
   metrics:
+    # The actuator doesn't publish histograms/percentiles/SLA buckets by default.
+    # Let's expose the full histogram for server requests, and precomputed percentiles for client requests
     distribution:
       percentiles-histogram:
-        http: true
+        http.server: true
+      percentiles:
+        http.client: .99, .95, .90
+    # This is a handy shortcut to add common labels
     tags:
       framework: spring-boot
