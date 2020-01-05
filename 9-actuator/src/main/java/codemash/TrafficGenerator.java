@@ -1,6 +1,7 @@
 package codemash;
 
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -9,7 +10,7 @@ import java.time.Duration;
 import java.util.Random;
 
 @Component
-public class TrafficGenerator implements CommandLineRunner {
+public class TrafficGenerator implements ApplicationListener<ApplicationReadyEvent> {
 
     private final WebClient client;
     private final Random random = new Random();
@@ -21,11 +22,10 @@ public class TrafficGenerator implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void onApplicationEvent(ApplicationReadyEvent event) {
         Flux.interval(Duration.ofMillis(50))
                 .flatMap(i -> randomRequest().uri(urlTemplate(), i).exchange())
                 .subscribe();
-
     }
 
     public String urlTemplate() {
