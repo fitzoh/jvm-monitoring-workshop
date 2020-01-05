@@ -3,6 +3,7 @@ package codemash;
 import codemash.utils.LatencyGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +29,10 @@ public class ActuatorApplication {
 
     @RequestMapping(value = {"/first/{id}", "/second/{id}", "/third/{id}"})
     public Mono endpoint(ServerWebExchange exchange) {
-        if (random.nextFloat() > .99) {
-            throw new BadLuckException("you got a bad roll");
+        if (random.nextFloat() > .95) {
+            boolean isPost = exchange.getRequest().getMethod() == HttpMethod.POST;
+            return Mono.error(new BadLuckException("you got a bad roll"))
+                    .delaySubscription(isPost ? latencyGenerator.reallySlow() : latencyGenerator.fast());
         }
         return Mono.just(exchange)
                 .delayElement(getLatency(exchange))
