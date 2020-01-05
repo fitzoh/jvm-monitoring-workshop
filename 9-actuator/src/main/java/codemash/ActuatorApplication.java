@@ -12,6 +12,8 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 import java.util.Random;
 
+import static org.springframework.web.reactive.HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE;
+
 
 @RestController
 @SpringBootApplication
@@ -30,19 +32,37 @@ public class ActuatorApplication {
             throw new BadLuckException("you got a bad roll");
         }
         return Mono.just(exchange)
-                .delayElement(getLatency())
+                .delayElement(getLatency(exchange))
                 .map(ex -> ex.getResponse().setStatusCode(HttpStatus.OK));
     }
 
 
-    private Duration getLatency() {
+    /**
+     * Determine how long the request should take
+     */
+    private Duration getLatency(ServerWebExchange exchange) {
         float roll = random.nextFloat();
+        Duration baseLatency = latencyTax(exchange);
         if (roll < .5) {
-            return latencyGenerator.fast();
-        } else if (roll < .8){
-            return latencyGenerator.slow();
+            return latencyGenerator.fast().plus(baseLatency);
+        } else if (roll < .8) {
+            return latencyGenerator.slow().plus(baseLatency);
         } else {
-            return latencyGenerator.reallySlow();
+            return latencyGenerator.reallySlow().plus(baseLatency);
+        }
+    }
+
+    /**
+     * Add a fixed amount of latency based on the endpoint requested (so that graphs are more interesting
+     */
+    private Duration latencyTax(ServerWebExchange exchange) {
+        String template = exchange.getAttribute(BEST_MATCHING_PATTERN_ATTRIBUTE).toString();
+        if (template.startsWith("/first")) {
+            return Duration.ofMillis(0);
+        } else if (template.startsWith("/second")) {
+            return Duration.ofMillis(250);
+        } else {
+            return Duration.ofSeconds(1);
         }
     }
 }
