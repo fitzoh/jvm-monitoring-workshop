@@ -53,14 +53,10 @@ public class TrafficGenerator implements ApplicationListener<ApplicationReadyEve
      */
     public WebClient.RequestHeadersUriSpec<?> randomRequest() {
         float roll = random.nextFloat();
-        if (roll < .5) {
+        if (roll < .7) {
             return client.get();
-        } else if (roll < .8) {
-            return client.post();
-        } else if (roll < .9) {
-            return client.put();
         } else {
-            return client.delete();
+            return client.post();
         }
     }
 }
