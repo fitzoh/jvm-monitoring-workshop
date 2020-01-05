@@ -9,6 +9,9 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 import java.util.Random;
 
+/**
+ * Sends a request to a random endpoint (with a random HTTP method) every 50ms
+ */
 @Component
 public class TrafficGenerator implements ApplicationListener<ApplicationReadyEvent> {
 
@@ -28,6 +31,9 @@ public class TrafficGenerator implements ApplicationListener<ApplicationReadyEve
                 .subscribe();
     }
 
+    /**
+     * pick a weighted random endpoint to hit (small chance of 404)
+     */
     public String urlTemplate() {
         float roll = random.nextFloat();
         if (roll < .6) {
@@ -42,6 +48,9 @@ public class TrafficGenerator implements ApplicationListener<ApplicationReadyEve
     }
 
 
+    /**
+     * Pick the HTTP method to use
+     */
     public WebClient.RequestHeadersUriSpec<?> randomRequest() {
         float roll = random.nextFloat();
         if (roll < .5) {
