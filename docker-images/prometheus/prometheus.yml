@@ -6,6 +6,11 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets: ['localhost:9090']
+    relabel_configs:
+      # use the `Name` tag instead of a random IP
+      - action: replace
+        source_labels: [ "__meta_ec2_tag_Name"]
+        target_label: "instance"
 
   - job_name: 'spring-boot'
     metrics_path: /actuator/prometheus
@@ -15,6 +20,11 @@ scrape_configs:
         filters:
           - name: "tag:Workload"
             values: ['spring-boot']
+    relabel_configs:
+      # use the `Name` tag instead of a random IP
+      - action: replace
+        source_labels: [ "__meta_ec2_tag_Name"]
+        target_label: "instance"
 
   - job_name: 'node-exporter'
     metrics_path: /metrics
@@ -25,6 +35,10 @@ scrape_configs:
           - name: "tag:Workload"
             values: ['*']
     relabel_configs:
+      # use the `Name` tag instead of a random IP
+      - action: replace
+        source_labels: [ "__meta_ec2_tag_Name"]
+        target_label: "instance"
       - action: replace
         source_labels: [ "__meta_ec2_tag_Workload"]
         target_label: "workload"
