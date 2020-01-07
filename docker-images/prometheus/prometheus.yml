@@ -24,3 +24,8 @@ scrape_configs:
         filters:
           - name: "tag:Workload"
             values: ['*']
+    relabel_configs:
+      - action: replace
+        source_labels: [ "__meta_ec2_tag_Workload"]
+        target_label: "workload"
+
