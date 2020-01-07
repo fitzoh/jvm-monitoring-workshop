@@ -24,6 +24,11 @@ public class CodeMashApplication {
         SpringApplication.run(CodeMashApplication.class, args);
     }
 
+    @RequestMapping(value = "/")
+    public Mono<String> hello() {
+        return Mono.just("hello codemash");
+    }
+
     @RequestMapping(value = {"/first/{id}", "/second/{id}", "/third/{id}"})
     public Mono endpoint(ServerWebExchange exchange) {
         if (random.nextFloat() > .99) {
