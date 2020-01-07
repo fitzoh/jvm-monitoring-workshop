@@ -1,3 +1,12 @@
+spring:
+  application:
+    name: codemash-demo
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: codemash
+    password: codemash
+    url: jdbc:postgresql://codemash-demo-db.cluster-cjskticvkyca.us-east-1.rds.amazonaws.com/codemash
+
 management:
   endpoints:
     web:
@@ -9,3 +18,4 @@ management:
         http: true
     tags:
       framework: spring-boot
+      application: ${spring.application.name}
