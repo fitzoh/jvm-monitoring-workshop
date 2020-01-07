@@ -1,0 +1,19 @@
+scrape_configs:
+  - job_name: 'relabeling'
+    static_configs:
+      - targets: ['http://some-thing-that-needs-to-be-relabeled.com']
+    relabel_configs:
+      # We want to replace the `target_label` (which doesn't exist yet)
+      - action: replace
+        # by taking these two labels
+        source_labels:
+          - "host"
+          - "environment"
+        #concatenating them together
+        separator: "-"
+        #matching them against this regex
+        regex: "(.*)"
+        #extracting the capture group
+        replacement: "$1"
+        #and putting it in this label
+        target_label: "generated"
