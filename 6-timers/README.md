@@ -11,7 +11,7 @@ The requests are split into `fast`, `medium`, `slow`, and `really-slow` latency 
 4. Graph the average duration for each latency bucket (total seconds / number of requests)
 5. Create a Heatmap showing the number of requests that fall in the `medium` bucket.
 There are a couple tricks you need to do to get a heatmap to render correctly:
-   * Update the `Legent` on the `Query` tab to display only `{{le}}`` (the histogram bucket values)
+   * Update the `Legend` on the `Query` tab to display only `{{le}}`` (the histogram bucket values)
    * Update the `Format` to `Heatmap` on the `Query` tab
    * On the `Visualization` tab set the visualization type to `Heatmap`
    * Finally, set the `Format` to `Time series buckets` instead of  the default `Time Series`
