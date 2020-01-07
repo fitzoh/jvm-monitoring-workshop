@@ -22,10 +22,10 @@ resource "aws_alb_listener" "app" {
 }
 
 resource "aws_alb_target_group" "app" {
-  name     = "spring-boot-app"
-  vpc_id   = aws_default_vpc.default.id
-  protocol = "HTTP"
-  port     = 8080
+  name                 = "spring-boot-app"
+  vpc_id               = aws_default_vpc.default.id
+  protocol             = "HTTP"
+  port                 = 8080
   deregistration_delay = 5
   health_check {
     path    = "/actuator/health"
@@ -99,7 +99,7 @@ resource "aws_ecs_service" "app" {
     container_port   = 8080
     target_group_arn = aws_alb_target_group.app.arn
   }
-  health_check_grace_period_seconds = 30
+  health_check_grace_period_seconds  = 30
   deployment_minimum_healthy_percent = 0
 }
 
