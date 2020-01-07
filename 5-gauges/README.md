@@ -5,6 +5,9 @@ This application has a single [Server-sent events](https://developer.mozilla.org
 We want to keep track of the number of connected clients.
 You can create additional connections by opening multiple browser tabs to [http://localhost:8005/](http://localhost:8005).
 
+#### Note
+Some browsers if you open too many SSE streams... if all else fails, curl?
+
 1. Review the source code and tests, then update the code to track the number of connected clients with a gauge
    * Hint: Look at the existing log statements for a hint on when clients connect and disconnect
 2. Add a counter for the total number of ping events sent.   
