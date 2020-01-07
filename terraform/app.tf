@@ -36,8 +36,8 @@ resource "aws_alb_target_group" "app" {
 
 resource "aws_instance" "app" {
   ami                         = data.aws_ami.amazon-linux-2.id
-  count                       = 1
-  instance_type               = "t3a.small"
+  count                       = 3
+  instance_type               = "t3a.medium"
   associate_public_ip_address = true
   security_groups             = [aws_security_group.app.name]
   user_data                   = data.template_file.app_user_data.rendered
