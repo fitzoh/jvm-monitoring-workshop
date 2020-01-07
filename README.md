@@ -35,3 +35,15 @@ The primary tasks you'll be concerned with are the [Docker Compose](https://docs
 * `./gradlew <directory>:bootRun`: Starts the Spring Boot app in `<directory>`.  The `bootRun` tasks have a hook added to copy the directory's Prometheus config file to the `docker-compose` directory and reload.
 
 Each spring boot app runs at port 8000 + the numeric prefix, so exercise `1` runs on port `8001`, and exercise `5` runs on port `8005`.
+
+
+## Resources
+* Main slides: https://docs.google.com/presentation/d/1XmKsXoTxpzzTQS3Mdhtgmq5UbZU64Kr14GzETjIGBN8
+* Slides for the 1 hour version: https://docs.google.com/presentation/d/14Z23SLsCwZFDXOOFAcCoDAXf8LCmWbv99b9qXiQtRr0
+* Repo for the 1 hour version: https://github.com/fitzoh/micrometer-prometheus-grafana-talk
+* Micrometer: http://micrometer.io/
+* Prometheus: https://prometheus.io/
+* Grafana: https://grafana.com/docs/grafana/latest/
+* Prometheus maintainers' blog: https://www.robustperception.io/blog
+* RED/USE: https://www.vividcortex.com/blog/monitoring-and-observability-with-use-and-red
+* Four golden signals: https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/#xref_monitoring_golden-signals
