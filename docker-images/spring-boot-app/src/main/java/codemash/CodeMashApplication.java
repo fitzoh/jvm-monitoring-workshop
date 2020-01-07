@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.time.Duration;
 import java.util.Random;
@@ -21,6 +22,7 @@ public class CodeMashApplication {
     private final LatencyGenerator latencyGenerator = new LatencyGenerator();
 
     public static void main(String[] args) {
+        Schedulers.enableMetrics();
         SpringApplication.run(CodeMashApplication.class, args);
     }
 
