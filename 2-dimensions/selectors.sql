@@ -22,5 +22,5 @@ WHERE uri NOT LIKE '/rest/%'
 SELECT *
 FROM http_server_requests
 WHERE method != 'GET'
-AND uri LIKE '/rest/%'
+  AND uri LIKE '/rest/%'
 --http_server_requests{method!="GET",uri=~"/rest/.*"}

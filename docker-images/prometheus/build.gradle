@@ -1,11 +1,9 @@
-
-
 def image = "590426026649.dkr.ecr.us-east-1.amazonaws.com/codemash-observability/prometheus:latest"
 
-task build(type: Exec){
+task build(type: Exec) {
     commandLine "docker", "build", ".", "-t", image
 }
 
-task push(type: Exec, dependsOn: build){
+task push(type: Exec, dependsOn: build) {
     commandLine "docker", "push", image
 }

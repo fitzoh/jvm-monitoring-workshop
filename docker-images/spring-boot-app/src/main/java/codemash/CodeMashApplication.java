@@ -39,7 +39,7 @@ public class CodeMashApplication {
         float roll = random.nextFloat();
         if (roll < .5) {
             return latencyGenerator.fast();
-        } else if (roll < .8){
+        } else if (roll < .8) {
             return latencyGenerator.slow();
         } else {
             return latencyGenerator.reallySlow();

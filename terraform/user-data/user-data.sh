@@ -1,9 +1,9 @@
 #!/bin/bash
 
 sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
-sudo docker plugin install  grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+sudo docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
 
-cat << EOF > /etc/docker/daemon.json
+cat <<EOF >/etc/docker/daemon.json
 {
   "debug": true,
   "log-driver": "loki",

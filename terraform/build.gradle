@@ -1,11 +1,11 @@
-task fmt(type: Exec){
+task fmt(type: Exec) {
     commandLine("terraform", "fmt", "--recursive")
 }
 
-task plan(type: Exec){
+task plan(type: Exec) {
     commandLine("terraform", "plan")
 }
 
-task apply(type: Exec){
+task apply(type: Exec) {
     commandLine("terraform", "apply", "-auto-approve")
 }

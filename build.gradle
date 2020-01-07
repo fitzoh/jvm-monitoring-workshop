@@ -14,6 +14,6 @@ task precompile(dependsOn: ["docker-compose:pull"]) {
 }
 
 //Only the facilitator will be able to run this so that a remote Grafana instance can hit a local Prometheus
-task startNgrok(type: Exec){
+task startNgrok(type: Exec) {
     commandLine "ngrok", "http", "-subdomain=codemash-prometheus", "9090"
 }
