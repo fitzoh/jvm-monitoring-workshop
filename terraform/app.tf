@@ -26,6 +26,7 @@ resource "aws_alb_target_group" "app" {
   vpc_id   = aws_default_vpc.default.id
   protocol = "HTTP"
   port     = 8080
+  deregistration_delay = 5
   health_check {
     path    = "/actuator/health"
     port    = "8080"
@@ -36,7 +37,7 @@ resource "aws_alb_target_group" "app" {
 resource "aws_instance" "app" {
   ami                         = data.aws_ami.amazon-linux-2.id
   count                       = 1
-  instance_type               = "t3a.small"
+  instance_type               = "t3a.large"
   associate_public_ip_address = true
   security_groups             = [aws_security_group.app.name]
   user_data                   = data.template_file.app_user_data.rendered
@@ -46,7 +47,6 @@ resource "aws_instance" "app" {
     Name     = "spring-boot-app-${count.index}"
     Workload = "spring-boot"
   }
-  lifecycle { create_before_destroy = true }
 }
 
 
@@ -100,6 +100,7 @@ resource "aws_ecs_service" "app" {
     target_group_arn = aws_alb_target_group.app.arn
   }
   health_check_grace_period_seconds = 30
+  deployment_minimum_healthy_percent = 0
 }
 
 
