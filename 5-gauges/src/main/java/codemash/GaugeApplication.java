@@ -1,6 +1,5 @@
 package codemash;
 
-import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,7 @@ public class GaugeApplication {
     //TODO instrument this to track the total number of active sessions
 
     /**
-     * @return a decaying Flux of Server Sent Eevents that sends a message after 10ms, then 20ms, then 30ms, etc
+     * @return a decaying Flux of Server Sent Events that sends a message after 10ms, then 20ms, then 30ms, etc
      */
     @GetMapping(value = {"/", "/ping"}, produces = MediaType.TEXT_PLAIN_VALUE)
     public Flux<ServerSentEvent<String>> sse() {
