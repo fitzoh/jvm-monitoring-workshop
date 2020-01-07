@@ -18,5 +18,5 @@ Some browsers if you open too many SSE streams... if all else fails, curl?
    * Graph the 15s increase of the min and max gauges
    * Graph the difference between the 15s increase of min and max gauges (you'll need to do some [1-1 vector matching](https://prometheus.io/docs/prometheus/latest/querying/operators/#one-to-one-vector-matches) again, as they have different labels).
    * Add a graph with 2 series, one showing the max pings, and one showing where prometheus thinks it will be 30 seconds from now (using the `predict_linear` function).
-   See what happens after a reset.
-   * Graph the average number of pings per session (you have both the sum of pings across all sessions and the total nubmer of sessions)
+   See what happens after you the oldest session.
+   * Graph the average number of pings per session (you have both the sum of pings across all sessions and the total number of sessions)
