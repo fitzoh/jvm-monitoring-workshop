@@ -36,6 +36,11 @@ The primary tasks you'll be concerned with are the [Docker Compose](https://docs
 
 Each spring boot app runs at port 8000 + the numeric prefix, so exercise `1` runs on port `8001`, and exercise `5` runs on port `8005`.
 
+## Remote Infra links
+* Prometheus: http://prometheus.codemash-observability-workshop.com:9090/
+* Grafana: http://grafana.codemash-observability-workshop.com:3000/
+* Spring Boot: http://app.codemash-observability-workshop.com/
+
 
 ## Resources
 * Main slides: https://docs.google.com/presentation/d/1XmKsXoTxpzzTQS3Mdhtgmq5UbZU64Kr14GzETjIGBN8
@@ -44,6 +49,7 @@ Each spring boot app runs at port 8000 + the numeric prefix, so exercise `1` run
 * Micrometer: http://micrometer.io/
 * Prometheus: https://prometheus.io/
 * Grafana: https://grafana.com/docs/grafana/latest/
+* Micrometer Slack inviter: http://slack.micrometer.io/
 * Prometheus maintainers' blog: https://www.robustperception.io/blog
 * RED/USE: https://www.vividcortex.com/blog/monitoring-and-observability-with-use-and-red
 * Four golden signals: https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/#xref_monitoring_golden-signals
