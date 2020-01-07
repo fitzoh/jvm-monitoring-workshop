@@ -15,8 +15,8 @@ import reactor.core.scheduler.Schedulers;
 
 import java.math.BigInteger;
 import java.time.Duration;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Use the endpoints here to manually trigger very bad things
@@ -52,9 +52,16 @@ public class OhNoController {
          * accumulator.add("oh no!oh no!oh no")
          */
         Mono.just(OH_NO)
-                .expand(s -> Mono.just(String.join("!", s, OH_NO)))
+                .expand(s -> {
+                    try {
+                        return Mono.just(s + "!");
+                    } catch (Error e) {
+                        sample.stop();
+                        throw e;
+                    }
+                })
                 .delayElements(Duration.ofMillis(2))
-                .collect(HashSet::new, Set::add)
+                .collect(ArrayList::new, List::add)
                 .subscribeOn(Schedulers.elastic())
                 .doFinally(signal -> sample.stop())
                 .subscribe();
