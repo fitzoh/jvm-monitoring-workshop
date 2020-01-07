@@ -15,13 +15,13 @@ import java.util.Random;
 
 @RestController
 @SpringBootApplication
-public class ActuatorApplication {
+public class CodeMashApplication {
 
     private final Random random = new Random();
     private final LatencyGenerator latencyGenerator = new LatencyGenerator();
 
     public static void main(String[] args) {
-        SpringApplication.run(ActuatorApplication.class, args);
+        SpringApplication.run(CodeMashApplication.class, args);
     }
 
     @RequestMapping(value = {"/first/{id}", "/second/{id}", "/third/{id}"})
