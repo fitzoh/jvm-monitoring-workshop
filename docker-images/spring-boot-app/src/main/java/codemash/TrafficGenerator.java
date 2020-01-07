@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 import java.util.Random;
 
-@Component
+//@Component
 public class TrafficGenerator implements CommandLineRunner {
 
     private final WebClient client;
@@ -16,7 +16,7 @@ public class TrafficGenerator implements CommandLineRunner {
 
     public TrafficGenerator(WebClient.Builder builder) {
         this.client = builder
-                .baseUrl("http://localhost:8009")
+                .baseUrl("http://localhost:8080")
                 .build();
     }
 
