@@ -53,3 +53,4 @@ Each spring boot app runs at port 8000 + the numeric prefix, so exercise `1` run
 * Prometheus maintainers' blog: https://www.robustperception.io/blog
 * RED/USE: https://www.vividcortex.com/blog/monitoring-and-observability-with-use-and-red
 * Four golden signals: https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/#xref_monitoring_golden-signals
+* PromQL cheat sheet: https://timber.io/blog/promql-for-humans/
