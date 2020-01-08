@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "db" {
-  source = "./db"
+  source = "db"
 }
 
 data "aws_route53_zone" "default" {
