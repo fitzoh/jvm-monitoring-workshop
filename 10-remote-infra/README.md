@@ -16,4 +16,4 @@ and each [EC2](https://aws.amazon.com/ec2/) host is running the Prometheus [Node
 5. Build a dashboard with HTTP latency
    * Alert when an instance does bad things
    * Add an annotation to show when chaos events happen
-6. Add a blackbox exporter configuration to hit the public endpoint for the application ?
+ 
