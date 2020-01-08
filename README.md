@@ -49,6 +49,7 @@ Each spring boot app runs at port 8000 + the numeric prefix, so exercise `1` run
 * Micrometer: http://micrometer.io/
 * Prometheus: https://prometheus.io/
 * Grafana: https://grafana.com/docs/grafana/latest/
+* OpenMetrics : https://github.com/OpenObservability/OpenMetrics
 * Micrometer Slack inviter: http://slack.micrometer.io/
 * Prometheus maintainers' blog: https://www.robustperception.io/blog
 * RED/USE: https://www.vividcortex.com/blog/monitoring-and-observability-with-use-and-red
