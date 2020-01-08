@@ -8,7 +8,7 @@ First, start up the Docker containers:
 
 To start the sample application:
 
-`./gradlew 1:bootRun`
+`./gradlew 1-:bootRun` or `./gradlew 1-simple-e2e:bootRun`
 
 The spring boot endpoint can then be accessed at http://localhost:8001/
 
