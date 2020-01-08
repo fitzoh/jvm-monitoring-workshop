@@ -24,9 +24,10 @@ public class TrafficGenerator implements ApplicationListener<ApplicationReadyEve
     public TrafficGenerator(@Value("${server.port}") String port, WebClient.Builder builder, MeterRegistry registry) {
         client = builder.baseUrl("http://localhost:" + port)
                 .build();
-        //TODO configure the distribution min/max values and publish percentile histogram,
-        //TODO then instrument the code to record the exponent
         summary = DistributionSummary.builder("exponent")
+                .minimumExpectedValue(0l)
+                .maximumExpectedValue(20l)
+                .sla(2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
                 .register(registry);
 
     }
@@ -49,6 +50,7 @@ public class TrafficGenerator implements ApplicationListener<ApplicationReadyEve
         while ((random.nextBoolean() || random.nextBoolean()) && exponent++ < 20) {
             exponent++;
         }
+        summary.record(exponent);
         int size = random.nextInt((int) Math.pow(2, exponent));
         return new byte[size];
     }

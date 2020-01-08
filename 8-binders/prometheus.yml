@@ -6,5 +6,7 @@ scrape_configs:
     metrics_path: /scrape
     static_configs:
       - targets: ['host.docker.internal:8008']
-    #TODO configure this
-    #relabel_configs:
+    relabel_configs:
+      - action: replace
+        replacement: binders-app
+        target_label: application

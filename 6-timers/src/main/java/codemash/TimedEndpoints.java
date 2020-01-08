@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 @RestController
@@ -33,6 +34,9 @@ public class TimedEndpoints {
     private Timer timer(String bucket) {
         return Timer.builder("http.server.requests")
                 .tag("bucket", bucket)
+//                .sla(slaBuckets())
+                .publishPercentileHistogram()
+                .publishPercentiles(0.75, 0.9, 0.99)
                 .register(meterRegistry);
     }
 
@@ -46,32 +50,49 @@ public class TimedEndpoints {
         return Mono.fromCallable(this.randomWait());
     }
 
-    //TODO time this manually
     public Duration fast() throws Exception {
+        long start = System.currentTimeMillis();
+
         Duration latency = latencyGenerator.fast();
         Thread.sleep(latency.toMillis());
+        timer("fast").record(System.currentTimeMillis() - start, TimeUnit.MILLISECONDS);
+
         return latency;
     }
 
-    //TODO time this with a sample
     public Duration medium() throws Exception {
+        Timer.Sample sample = Timer.start();
+
         Duration latency = latencyGenerator.medium();
         Thread.sleep(latency.toMillis());
+
+        sample.stop(timer("medium"));
         return latency;
     }
 
-    //TODO time this with a lambda
     public Duration slow() throws Exception {
-        Duration latency = latencyGenerator.slow();
-        Thread.sleep(latency.toMillis());
-        return latency;
+
+        return timer("slow").record(() -> {
+            Duration latency = latencyGenerator.slow();
+            try {
+                Thread.sleep(latency.toMillis());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return latency;
+        });
     }
 
-    //TODO time this with *both* a timer and a long task timer
-    //TODO (just do the timer at first)
     public Duration reallySlow() throws Exception {
+        Timer.Sample timerSample = Timer.start();
+        LongTaskTimer.Sample lttSample = ltt().start();
+
         Duration latency = latencyGenerator.reallySlow();
         Thread.sleep(latency.toMillis());
+
+
+        timerSample.stop(timer("really-slow"));
+        lttSample.stop();
         return latency;
     }
 

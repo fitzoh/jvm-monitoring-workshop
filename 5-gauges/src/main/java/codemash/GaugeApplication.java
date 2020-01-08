@@ -20,22 +20,19 @@ import java.util.UUID;
 public class GaugeApplication {
 
     private static final Logger log = LoggerFactory.getLogger(GaugeApplication.class);
-    private final MeterRegistry meterRegistry;
 
-    //TODO use this when you refactor your instrumentation
     private final ActiveSessions activeSessions;
 
     public GaugeApplication(MeterRegistry meterRegistry, ActiveSessions activeSessions) {
-        this.meterRegistry = meterRegistry;
         this.activeSessions = activeSessions;
+        new ActiveSessionsMeterBinder(activeSessions).bindTo(meterRegistry);
     }
 
     public static void main(String[] args) {
         SpringApplication.run(GaugeApplication.class, args);
+
     }
 
-
-    //TODO instrument this to track the total number of active sessions
 
     /**
      * @return a decaying Flux of Server Sent Events that sends a message after 10ms, then 20ms, then 30ms, etc
@@ -47,13 +44,16 @@ public class GaugeApplication {
                 .delayUntil(i -> Mono.delay(Duration.ofMillis(i * 10)))
                 .map(i -> ServerSentEvent.builder("ping " + sessionId).build())
                 .doOnSubscribe(ignored -> {
+                    activeSessions.register(sessionId);
                     log.info("starting SSE stream, session = {}", sessionId);
                 })
                 .doOnEach(signal -> {
                     log.debug("pinging {}", sessionId);
+                    activeSessions.incrementPingCount(sessionId);
                 })
                 .doOnCancel(() -> {
                     log.info("cancelled SSE Stream, session = {}", sessionId);
+                    activeSessions.deregister(sessionId);
                 });
     }
 }

@@ -20,3 +20,4 @@ management:
     # This is a handy shortcut to add common labels
     tags:
       framework: spring-boot
+      application: actuator-app
