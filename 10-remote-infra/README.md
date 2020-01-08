@@ -10,7 +10,7 @@ and each [EC2](https://aws.amazon.com/ec2/) host is running the Prometheus [Node
 2. Import the node exporter dashboard from https://grafana.com/grafana/dashboards/11074
 3. Update your local Prometheus to [federate](https://prometheus.io/docs/prometheus/latest/federation/) from the remote Prometheus instance (you can start by just pulling down the spring boot metrics `'{job="spring-boot"}'`).
 4. Do some kind of recording rule to make http timing histograms faster
-   * start with buckets aggregated across all instances?
+   * start with buckets aggregated by endpoint across all instances
    * recording rule with offset
    * % change between now and previous value
 5. Build a dashboard with HTTP latency
