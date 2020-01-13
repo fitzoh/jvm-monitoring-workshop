@@ -43,6 +43,7 @@ Each spring boot app runs at port 8000 + the numeric prefix, so exercise `1` run
 
 
 ## Resources
+* Completed exercises can be found in the `complete` branch: https://github.com/fitzoh/jvm-monitoring-workshop/tree/complete
 * Main slides: https://docs.google.com/presentation/d/1XmKsXoTxpzzTQS3Mdhtgmq5UbZU64Kr14GzETjIGBN8
 * Slides for the 1 hour version: https://docs.google.com/presentation/d/14Z23SLsCwZFDXOOFAcCoDAXf8LCmWbv99b9qXiQtRr0
 * Repo for the 1 hour version: https://github.com/fitzoh/micrometer-prometheus-grafana-talk
